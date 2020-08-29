@@ -1,0 +1,20 @@
+// variables
+@import './variables';
+// mixins
+@import './mixins';
+
+// main component
+@import '../../components/main/main';
+
+// sidebar component
+@import '../../components/sidebar/sidebar';
+
+// utilities:
+// card, filters and searcher
+@import '../../components/utilities/card/card';
+@import '../../components/utilities/filter/filter';
+@import '../../components/utilities/searcher/searcher';
+
+body {
+    background: $secondary;
+}

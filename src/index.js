@@ -3,11 +3,36 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/style.css';
+// redux and apollo
+import { Provider } from 'react-redux'
+import generateStore from './redux/store'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo'
+
+let store = generateStore()
+
+let url = 'https://rickandmortyapi.com/graphql/'
+
+let client = new ApolloClient({
+  uri: url
+})
+
+let WithStore = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+
+let WithApollo = () => (
+  <ApolloProvider client={client}>
+    <WithStore />
+  </ApolloProvider>
+)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <WithApollo />,
   document.getElementById('root')
 );
 

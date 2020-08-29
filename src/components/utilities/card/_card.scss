@@ -1,0 +1,22 @@
+// // card component
+.card {
+    @include caja(15rem, 18rem, 0.9rem, 0.9rem);
+    margin-top: 2rem;
+
+    // card header
+    &__header {
+        height: 9rem;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    // card body
+    &__body {
+        h4 {
+            @include text(center, 1.5rem, 400);
+            margin-top: 1.5rem;
+        }
+    }
+}
