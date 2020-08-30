@@ -1,95 +1,116 @@
-import React, { useState } from 'react'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import React, { useState } from "react"
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import Alert from "react-bootstrap/Alert"
+import Filter from "../filter/Filter"
 
-import { connect } from 'react-redux'
+import { connect } from "react-redux"
 
-import searchReducer, { setSearchAction, setAttributeAction, getDataAction } from '../../../redux/searcherDucks'
+import searchReducer, {
+    setSearchAction,
+    setAttributeAction,
+    getDataAction,
+    setDisplayAction
+} from "../../../redux/searcherDucks"
 
-function Searcher({ locations, setSearchAction, setAttributeAction, getDataAction }) {
-	let [filterResults, setFilterResults] = useState([])
-	let [cursor, setCursor] = useState(0)
+function Searcher({
+    chars,
+    setSearchAction,
+    setAttributeAction,
+    getDataAction,
+    setDisplayAction
+}) {
+    let [filterResults, setFilterResults] = useState([])
+    let [show, setShow] = useState(true)
 
-	// listen to user's input
-	let handleInput = (e) => {
-		let dropdown = document.querySelector('.searcher__results')
-		let input = e.target.value
+    // listen to user's input
+    let handleInput = (e) => {
+        let input = e.target.value
 
-		setSearchAction(input)
+        
+        setSearchAction(input)
+        getDataAction()
+        
+        // search doesn't start's until user types 3rd char
+        if (input.length >= 3) {
+            setDisplayAction(true)
+        }
 
+        // si no se ha ingresado nada en el input 
+        // se oculta el container de resultados
+        if (input.length === 0) {
+            setFilterResults([])
+        }
+    }
 
-		getDataAction()
+    // user select name attribute radio button
+    let handleRadio = (e) => {
+        let input = document.querySelector("#searcher-input")
 
+        setAttributeAction(e.target.id.toLowerCase())
+        input.removeAttribute("disabled")
+    }
 
-		// if the user's input matches with a result,
-		// it filters the list and show the container
-		if (locations.results.filter((elem) => elem.name.toLowerCase().includes(input))) {
-			dropdown.classList.remove('hide')
-			setFilterResults(locations.results.filter((elem) => elem.name.toLowerCase().includes(input)))
-		}
+    return (
+        <div className='searcher'>
+            <Container>
+                <Row>
+                    {/* searcher input */}
+                    <input
+                        id='searcher-input'
+                        type='text'
+                        onChange={handleInput}
+                        placeholder='Ingresa tu búsqueda...'
+                        disabled
+                    />
 
-		// si no se ha ingresado nada en el input se oculta el container de resultados
-		if (input.length === 0) {
-			setFilterResults([])
-			dropdown.classList.add('hide')
-			setCursor(0)
-		}
-	}
-
-
-	// user select name attribute radio button
-	let handleRadio = (e) => {
-		let input = document.querySelector('#searcher-input')
-
-		setAttributeAction(e.target.id)
-		input.removeAttribute('disabled')
-	}
-
-	return (
-		<div className='searcher'>
-			<Container>
-				<Row>
-					{/* searcher input */}
-					<input
-						id='searcher-input'
-						type='text'
-						onChange={handleInput}
-
-						placeholder='Ingresa tu búsqueda...'
-						disabled
-					/>
-					
-					{/* searcher radio buttons (name or type) */}
-					<Col lg='6'>
-						{/* name */}
-						<div className='mt-3 searcher__name'>
-							<label htmlFor='name' className='mr-1'>
-								Name
-							</label>
-							<input type='radio' id='name' name='attr' onChange={handleRadio} />
-						</div>
-					</Col>
-					<Col lg='6'>
-						{/* type */}
-						<div className='mt-3 searcher__type'>
-							<label htmlFor='type' className='mr-1'>
-								Type
-							</label>
-							<input type='radio' id='type' name='attr' onChange={handleRadio} />
-						</div>
-					</Col>
-				</Row>
-			</Container>
-		</div>
-	)
+                    {/* searcher radio buttons (name or type) */}
+                    <Col lg='2'>
+                        {/* name */}
+                        <div className='mt-3 searcher__name'>
+                            <Filter
+                                filterName='Name'
+                                nameAttr='attribute'
+                                handleRadio={handleRadio}
+                            />
+                        </div>
+                    </Col>
+                    <Col lg='2'>
+                        {/* type */}
+                        <div className='mt-3 searcher__type'>
+                            <Filter
+                                filterName='Type'
+                                nameAttr='attribute'
+                                handleRadio={handleRadio}
+                            />
+                        </div>
+                    </Col>
+                    <Col lg='8'>
+                        {show ? <Alert
+                            variant='warning'
+                            className='mt-3'
+                            onClose={() => setShow(false)}
+                            dismissible>
+                            Choose a filter and an attribute (name or type)
+                        </Alert> : null}
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    )
 }
 
 function mapState(state) {
-	return {
-		chars: state.search.array.characters,
-		locations: state.search.array.locations
-	}
+    return {
+        chars: state.search.array.characters,
+        locations: state.search.array.locations,
+    }
 }
 
-export default connect(mapState, { setSearchAction, setAttributeAction, getDataAction })(Searcher)
+export default connect(mapState, {
+    setSearchAction,
+    setAttributeAction,
+    getDataAction,
+    setDisplayAction
+})(Searcher)

@@ -6,6 +6,12 @@
   background: #e5f3fe;
 }
 
+.sidebar {
+  padding: 2rem;
+  border-right: 3px solid #fffefe;
+  height: 100vh;
+}
+
 .card {
   width: 15rem;
   height: 18rem;
@@ -24,17 +30,43 @@
 
 .card__body h4 {
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 4.7rem;
+}
+
+.filter {
   margin-top: 1.5rem;
 }
 
+.filter label input {
+  margin: 0.2rem 0.9rem 0 -0.9rem;
+  width: 1.1rem;
+  height: 1rem;
+}
+
+.filter label input:hover {
+  cursor: pointer;
+}
+
+.filter label input:checked:before {
+  content: "";
+  display: block;
+  position: relative;
+  top: 3.3px;
+  left: 3.9px;
+  width: 9.5px;
+  height: 9.5px;
+  border-radius: 50%;
+  background: #0d47a1;
+}
+
 .searcher {
-  width: 39.6875rem;
+  width: 56rem;
 }
 
 .searcher #searcher-input {
-  width: 39.6875rem;
+  width: 56rem;
   height: 2.2rem;
   border-radius: 0.3rem;
   padding: 1.2rem;
@@ -51,26 +83,10 @@
   background: #E9E7E5;
 }
 
-.searcher__results ul {
-  list-style-type: none;
-  width: 100%;
-  padding-left: 0;
-}
-
-.searcher__results ul li {
-  padding-top: 0.8rem;
-  padding-left: 1.1rem;
-  font-size: 1.1rem;
-  list-style: none;
-}
-
-.searcher__results ul li:hover, .searcher__results ul li:focus-within > ul {
-  background: #a7f3e4;
-}
-
 .searcher__name input, .searcher__type input {
   position: relative;
   top: .1rem;
+  margin-right: 1rem;
 }
 
 .searcher .hide {

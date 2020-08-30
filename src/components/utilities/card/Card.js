@@ -1,14 +1,14 @@
 import React from 'react'
-import Rick from '../../../assets/img/rick.webp'
+import PropTypes from 'prop-types'
 
-function Card({name}) {
+function Card({name, image}) {
     return (
         <div className='card'>
 			{/* card header */}
             <div className='card__header'>
 
 				{/* imagen */}
-				<img src={Rick} alt='rick' />
+				<img src={image} alt='rick' />
 
 			</div>
 			{/* card body */}
@@ -20,6 +20,11 @@ function Card({name}) {
 			</div>
         </div>
     )
+}
+
+Card.propTypes = {
+	name: PropTypes.string.isRequired,
+	image: PropTypes.string.isRequired
 }
 
 export default Card

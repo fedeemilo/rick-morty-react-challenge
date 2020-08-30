@@ -5,24 +5,34 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Card from "../utilities/card/Card"
 
-function Main() {
+import { connect } from "react-redux"
+
+function Main({ chars, display }) {
     let names = ["rick", "morty", "summer"]
 
     return (
         <div className='main'>
             <Container>
                 <Searcher />
-
                 <Row>
-                    {names.map(name => (
-                        <Col>
-                            <Card name={name} />
-                        </Col>
-                    ))}
+                    {display
+                        ? chars.results.map((char) => (
+                              <Col key={char.id}>
+                                  <Card name={char.name} image={char.image} />
+                              </Col>
+                          ))
+                        : null}
                 </Row>
             </Container>
         </div>
     )
 }
 
-export default Main
+function mapState(state) {
+    return {
+        chars: state.search.array.characters,
+        display: state.search.display,
+    }
+}
+
+export default connect(mapState)(Main)

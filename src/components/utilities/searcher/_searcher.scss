@@ -1,11 +1,11 @@
 // searcher component
 
 .searcher {
-	width: 39.6875rem;
+	width: 56rem;
 
 	// input search by name or type
 	#searcher-input {
-		@include caja(39.6875rem, 2.2rem, 0.3rem, 1.2rem);
+		@include caja(56rem, 2.2rem, 0.3rem, 1.2rem);
 		border: 0.02rem solid rgb(105, 103, 103);
 		margin-top: 2rem;
 	}
@@ -19,32 +19,14 @@
 		border-bottom-right-radius: 0.3rem;
 		background: #E9E7E5;
 
-		// list
-		ul {
-			list-style-type: none;
-            width: 100%;
-            padding-left: 0;
-            
-			// list elements
-			li {
-    
-                padding-top: 0.8rem;
-                padding-left: 1.1rem;
-				font-size: 1.1rem;
-                list-style:none;
-                
-
-				&:hover, &:focus-within > ul {
-					background: $blueAlien;
-				}
-			}
-		}
+		
 	}
 
 	&__name, &__type {
 		input {
 			position: relative;
 			top: .1rem;
+			margin-right: 1rem;
 		}
 	}
 

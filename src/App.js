@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Main from './components/main/Main'
+import Sidebar from './components/sidebar/Sidebar'
 
 function App() {
 	return (
@@ -10,12 +11,11 @@ function App() {
 			<Container fluid>
 				<Row>
 					{/* Sidebar */}
-					<Col sm={4}>
-						<h1>Hola testeando</h1>
-						<p>dasdasdasdasdasdasd</p>
+					<Col sm={3}>
+						<Sidebar />
 					</Col>
 					{/* Main */}
-					<Col sm={8}>
+					<Col sm={9}>
 						<Main />
 					</Col>
 				</Row>
