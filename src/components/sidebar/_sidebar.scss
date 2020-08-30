@@ -3,9 +3,16 @@
 .sidebar {
 
     padding: 2rem;
-    border-right: 3px solid rgb(255, 254, 254);
+    border-right: 5px solid rgb(255, 254, 254);
     height: 100vh;
+    margin-right: 3rem;
 
+    &__filters {
+
+        h4 {
+            font-weight: 700;
+        }
+    }
 
 
 }

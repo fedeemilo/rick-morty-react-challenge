@@ -3,21 +3,20 @@ import PropTypes from "prop-types"
 
 import { connect } from "react-redux"
 
-import { setFilterAction, setDisplayAction } from "../../../redux/searcherDucks"
+import { setFilterAction, getDataAction } from "../../../redux/searcherDucks"
 
 function Filter({
     filterName,
     nameAttr,
     handleRadio,
     setFilterAction,
-    setDisplayAction,
+    getDataAction,
 }) {
-    let [check, setCheck] = useState(false)
-
-    let handleFilterSelect = (e) => {
+    let handleFilterSelect = e => {
         let filterName = e.target.id.toLowerCase()
 
         setFilterAction(filterName)
+        getDataAction()
     }
 
     return (
@@ -45,4 +44,4 @@ function mapState(state) {
     }
 }
 
-export default connect(mapState, { setFilterAction, setDisplayAction })(Filter)
+export default connect(mapState, { setFilterAction, getDataAction })(Filter)

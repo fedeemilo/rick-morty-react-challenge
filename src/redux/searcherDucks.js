@@ -1,4 +1,3 @@
-import { updateDB, getFavs } from "../firebase"
 import ApolloClient, { gql } from "apollo-boost"
 
 // constants
@@ -38,11 +37,11 @@ export default function reducer(state = initialData, action) {
         case GET_INPUT:
             return { ...state, search: action.payload, fetching: false }
         case GET_ATTRIBUTE:
-			return { ...state, attribute: action.payload, fetching: false }
-		case GET_FILTER:
-			return {...state, filter: action.payload, fetching: false}
-		case GET_DISPLAY:
-			return {...state, display: action.payload, fetching: false}
+            return { ...state, attribute: action.payload, fetching: false }
+        case GET_FILTER:
+            return { ...state, filter: action.payload, fetching: false }
+        case GET_DISPLAY:
+            return { ...state, display: action.payload, fetching: false }
         default:
             return state
     }
@@ -82,17 +81,36 @@ export default function reducer(state = initialData, action) {
 
 // get data from rick and morty api
 export let getDataAction = () => (dispatch, getState) => {
+    let filter = getState().search.filter
+    console.log(filter)
+
+    let graphFilter = () => {
+        switch (filter) {
+            case "characters":
+                return "FilterCharacter"
+            case "locations":
+                return "FilterLocation"
+            case "episodes":
+                return "FilterEpisode"
+            default:
+                return filter
+        }
+    }
+
     let query = gql`
-        query($filter: FilterCharacter) {
-            characters(filter: $filter) {
+        query($filter: ${graphFilter()}) {
+            ${filter}(filter: $filter) {
                 results {
                     id
                     name
-                    image
+                   ${filter === "characters" ? "image" : ""}
+                   ${filter === "locations" ? "dimension" : ""}
+                   ${filter === "episodes" ? "episode" : ""}
                 }
             }
         }
     `
+    console.log(query)
 
     dispatch({
         type: GET_DATA,
@@ -123,7 +141,7 @@ export let getDataAction = () => (dispatch, getState) => {
 }
 
 // set the search attribute of the state
-export let setSearchAction = (elem) => (dispatch) => {
+export let setSearchAction = elem => dispatch => {
     dispatch({
         type: GET_INPUT,
         payload: elem,
@@ -131,7 +149,7 @@ export let setSearchAction = (elem) => (dispatch) => {
 }
 
 // set the attribute attr of state
-export let setAttributeAction = (elem) => (dispatch) => {
+export let setAttributeAction = elem => dispatch => {
     dispatch({
         type: GET_ATTRIBUTE,
         payload: elem,
@@ -139,7 +157,7 @@ export let setAttributeAction = (elem) => (dispatch) => {
 }
 
 // set the filter
-export let setFilterAction = (elem) => (dispatch) => {
+export let setFilterAction = elem => dispatch => {
     dispatch({
         type: GET_FILTER,
         payload: elem,
@@ -147,9 +165,9 @@ export let setFilterAction = (elem) => (dispatch) => {
 }
 
 // set display mode of array results
-export let setDisplayAction = (elem) => (dispatch) => {
-	dispatch({
-		type: GET_DISPLAY,
-		payload: elem
-	})
+export let setDisplayAction = elem => dispatch => {
+    dispatch({
+        type: GET_DISPLAY,
+        payload: elem,
+    })
 }

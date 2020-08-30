@@ -1,30 +1,38 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from "react"
+import PropTypes from "prop-types"
 
-function Card({name, image}) {
+function Card({ name, image, dimension, episode }) {
     return (
         <div className='card'>
-			{/* card header */}
+            {/* card header */}
             <div className='card__header'>
+                {/* imagen */}
+                {image !== undefined ? <img src={image} alt={name} /> : null}
 
-				{/* imagen */}
-				<img src={image} alt='rick' />
+                {/* dimension */}
+                {dimension !== undefined ? (
+                    <h4 className='text-center text-primary'>{dimension}</h4>
+                ) : null}
 
-			</div>
-			{/* card body */}
+                {/* episode */}
+                {episode !== undefined ? (
+                    <h4 className='text-center text-primary'>{episode}</h4>
+                ) : null}
+            </div>
+            {/* card body */}
             <div className='card__body'>
-
-				{/* nombre */}
-				<h4>{name}</h4>
-
-			</div>
+                {/* nombre */}
+                <h4>{name}</h4>
+            </div>
         </div>
     )
 }
 
 Card.propTypes = {
-	name: PropTypes.string.isRequired,
-	image: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string,
+    dimension: PropTypes.string,
+    episode: PropTypes.string,
 }
 
 export default Card

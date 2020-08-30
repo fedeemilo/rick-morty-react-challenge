@@ -6,43 +6,82 @@
   background: #e5f3fe;
 }
 
+.rick-pic {
+  margin-top: 13.4%;
+}
+
 .sidebar {
   padding: 2rem;
-  border-right: 3px solid #fffefe;
+  border-right: 5px solid #fffefe;
   height: 100vh;
+  margin-right: 3rem;
+}
+
+.sidebar__filters h4 {
+  font-weight: 700;
 }
 
 .card {
   width: 15rem;
-  height: 18rem;
+  height: 100%;
   border-radius: 0.9rem;
   padding: 0.9rem;
   margin-top: 2rem;
+  -webkit-transition: 400ms;
+  transition: 400ms;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.card:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.75);
 }
 
 .card__header {
-  height: 9rem;
+  height: 100%;
 }
 
 .card__header img {
   width: 100%;
+  height: 100%;
 }
 
 .card__body h4 {
   text-align: center;
   font-size: 1.2rem;
   font-weight: 500;
-  margin-top: 4.7rem;
+  margin-top: 20%;
+}
+
+.small-height {
+  height: 2rem !important;
+}
+
+.medium-height {
+  height: 12rem !important;
 }
 
 .filter {
   margin-top: 1.5rem;
 }
 
+.filter label {
+  font-weight: 500;
+}
+
 .filter label input {
   margin: 0.2rem 0.9rem 0 -0.9rem;
   width: 1.1rem;
   height: 1rem;
+  position: relative;
+  top: .1rem;
 }
 
 .filter label input:hover {
