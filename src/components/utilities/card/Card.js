@@ -2,6 +2,16 @@ import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 
 function Card({ name, image, dimension, episode }) {
+
+    // manipulate height of card depending on content
+    useEffect(() => {
+        let card = document.querySelectorAll('.card')
+        // custom location and episode card
+        if (dimension !== undefined || episode !== undefined) {
+            card.forEach(c => c.classList.add('custom-height'))
+        }
+    })
+
     return (
         <div className='card'>
             {/* card header */}
@@ -11,7 +21,7 @@ function Card({ name, image, dimension, episode }) {
 
                 {/* dimension */}
                 {dimension !== undefined ? (
-                    <h4 className='text-center text-primary'>{dimension}</h4>
+                    <h4 className='text-center text-primary h5'>{dimension}</h4>
                 ) : null}
 
                 {/* episode */}

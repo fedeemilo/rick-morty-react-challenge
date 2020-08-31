@@ -4,10 +4,16 @@
 	width: 56rem;
 
 	// input search by name or type
-	#searcher-input {
-		@include caja(56rem, 2.2rem, 0.3rem, 1.2rem);
+	&__input {
+		@include box(92.8%, 2.2rem, 0.3rem, 1.2rem);
 		border: 0.02rem solid rgb(105, 103, 103);
-		margin-top: 2rem;
+		margin-top: .2rem;
+	}
+
+	&__title {
+		@include text(left, 1.4rem, 700);
+		margin-top: 1.8rem;
+		color: #03C1D8;
 	}
 
 	&__results {

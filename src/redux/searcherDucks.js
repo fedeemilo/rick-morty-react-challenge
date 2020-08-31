@@ -1,18 +1,31 @@
 import ApolloClient, { gql } from "apollo-boost"
+import { onError } from "apollo-link-error"
+import { InMemoryCache } from "apollo-cache-inmemory"
 
 // constants
-
 let initialData = {
     display: false,
     array: [],
     search: "",
     filter: "characters",
     fetching: false,
-    attribute: "name",
+    attribute: "name"
 }
+
+let errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+        graphQLErrors.forEach(({ message, locations, path }) =>
+            console.log(
+                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+            )
+        )
+    if (networkError) console.log(`[Network error]: ${networkError}`)
+})
 
 let client = new ApolloClient({
     uri: "https://rickandmortyapi.com/graphql",
+    cache: new InMemoryCache(),
+    errorPolicy: "ignore",
 })
 
 let GET_DATA = "GET_DATA"
@@ -47,43 +60,13 @@ export default function reducer(state = initialData, action) {
     }
 }
 
-// EPISODES
-// query($filter: FilterEpisode){
-// 	episodes(filter: $filter) {
-// 	  results {
-// 		id
-// 		name
-// 	  }
-// 	}
-//   }
-
-// CHARACTERS
-// query($filter: FilterCharacter) {
-// 	characters(filter: $filter) {
-// 	  results {
-// 		id
-// 		name
-// 		image
-// 	  }
-// 	}
-//   }
-
-// LOCATIONS
-// query($filter: FilterLocation) {
-// 	locations(filter: $filter) {
-// 		results {
-// 			name
-// 		}
-// 	}
-// }
-
 // actions
 
 // get data from rick and morty api
 export let getDataAction = () => (dispatch, getState) => {
     let filter = getState().search.filter
-    console.log(filter)
 
+    // set function of query depending on the selected filter
     let graphFilter = () => {
         switch (filter) {
             case "characters":
@@ -97,6 +80,7 @@ export let getDataAction = () => (dispatch, getState) => {
         }
     }
 
+    // dynamic query
     let query = gql`
         query($filter: ${graphFilter()}) {
             ${filter}(filter: $filter) {
@@ -110,16 +94,15 @@ export let getDataAction = () => (dispatch, getState) => {
             }
         }
     `
-    console.log(query)
 
     dispatch({
         type: GET_DATA,
     })
 
+    // obtain search and attribute from the store
     let { search, attribute } = getState().search
     let obj = {}
     obj[attribute] = search
-    console.log(obj)
 
     return client
         .query({
@@ -128,6 +111,7 @@ export let getDataAction = () => (dispatch, getState) => {
         })
         .then(({ data, error }) => {
             if (error) {
+
                 dispatch({
                     type: GET_DATA_ERROR,
                     payload: error,

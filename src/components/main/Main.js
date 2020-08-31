@@ -20,12 +20,14 @@ function Main({ array, display, filter }) {
 
     return (
         <div className='main'>
-            <Container>
+            <Container className='main__container'>
+                {/* searcher */}
                 <Searcher />
                 <Row>
-                    {display ? (
-                        filterResults[`${filter}`].results.map(char => (
-                            <Col key={char.id}>
+                    {/* grid of cards */}
+                    {display && Object.keys(filterResults).length !== 0 ? (
+                        filterResults[`${filter}`].results.sort().map(char => (
+                            <Col lg={3} key={char.id}>
                                 <Fade>
                                     <Card
                                         name={char.name}
@@ -38,6 +40,7 @@ function Main({ array, display, filter }) {
                         ))
                     ) : (
                         <Zoom>
+                            {/* home image */}
                             <img src={Rick} alt='rick' className='rick-pic' />
                         </Zoom>
                     )}

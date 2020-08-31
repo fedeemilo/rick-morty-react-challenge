@@ -1,20 +1,33 @@
 // variables
-@import './variables';
+@import "./variables";
 // mixins
-@import './mixins';
+@import "./mixins";
 
 // main component
-@import '../../components/main/main';
+@import "../../components/main/main";
 
 // sidebar component
-@import '../../components/sidebar/sidebar';
+@import "../../components/sidebar/sidebar";
 
 // utilities:
 // card, filters and searcher
-@import '../../components/utilities/card/card';
-@import '../../components/utilities/filter/filter';
-@import '../../components/utilities/searcher/searcher';
+@import "../../components/utilities/card/card";
+@import "../../components/utilities/filter/filter";
+@import "../../components/utilities/searcher/searcher";
+
+// footer
+@import "../../components/footer/footer";
 
 body {
     background: $secondary;
+    overflow-x: hidden;
+}
+
+// vertical line
+.vl {
+    border-left: 6px solid white;
+    position: absolute;
+    left: 20%;
+    height: 100%;
+    z-index: -1;
 }

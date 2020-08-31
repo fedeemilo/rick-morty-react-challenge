@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -7,7 +7,7 @@ import Filter from "../filter/Filter"
 
 import { connect } from "react-redux"
 
-import searchReducer, {
+import {
     setSearchAction,
     setAttributeAction,
     getDataAction,
@@ -19,8 +19,19 @@ function Searcher({
     setAttributeAction,
     getDataAction,
     setDisplayAction,
+    search,
 }) {
     let [show, setShow] = useState(true)
+    let [disable, setDisable] = useState(false)
+
+    useEffect(() => {
+        // if the filter selected is episodes, it disable's type attr
+        if (search.filter === "episodes") {
+            setDisable(true)
+        } else {
+            setDisable(false)
+        }
+    }, [search])
 
     // listen to user's input
     let handleInput = e => {
@@ -39,23 +50,27 @@ function Searcher({
 
     // user select name attribute radio button
     let handleRadio = e => {
-        let input = document.querySelector("#searcher-input")
-
         setAttributeAction(e.target.id.toLowerCase())
-        input.removeAttribute("disabled")
     }
 
+    // capitalize string
+    let capitalize = ([first, ...rest], lowerRest = false) =>
+        first.toUpperCase() +
+        (lowerRest ? rest.join("").toLowerCase() : rest.join(""))
+
     return (
-        <div className='searcher'>
+        <div className='searcher '>
+            <h4 className='searcher__title'>
+                {capitalize(search.filter, true)}
+            </h4>
             <Container>
                 <Row>
                     {/* searcher input */}
                     <input
-                        id='searcher-input'
+                        className='searcher__input'
                         type='text'
                         onChange={handleInput}
                         placeholder='Enter your search...'
-                        disabled
                     />
 
                     {/* searcher radio buttons (name or type) */}
@@ -76,19 +91,9 @@ function Searcher({
                                 filterName='Type'
                                 nameAttr='attribute'
                                 handleRadio={handleRadio}
+                                isDisabled={disable}
                             />
                         </div>
-                    </Col>
-                    <Col lg='8'>
-                        {show ? (
-                            <Alert
-                                variant='warning'
-                                className='mt-3'
-                                onClose={() => setShow(false)}
-                                dismissible>
-                                Choose a filter and an attribute (name or type)
-                            </Alert>
-                        ) : null}
                     </Col>
                 </Row>
             </Container>
@@ -96,7 +101,11 @@ function Searcher({
     )
 }
 
-function mapState(state) {}
+function mapState(state) {
+    return {
+        search: state.search,
+    }
+}
 
 export default connect(mapState, {
     setSearchAction,

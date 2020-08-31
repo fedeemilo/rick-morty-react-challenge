@@ -1,6 +1,8 @@
 // // card component
 .card {
-    @include caja(15rem, 100%, 0.9rem, 0.9rem);
+    @include box(11.6rem, 16rem, 0.9rem, 0.9rem);
+    max-width: 12rem;
+    max-height: 100%;
     margin-top: 2rem;
     transition: 400ms;
     display: flex;
@@ -24,17 +26,16 @@
     // card body
     &__body {
         h4 {
-            @include text(center, 1.2rem, 500);
-            margin-top: 20%
+            @include text(center, 1rem, 500);
+            margin-top: 17%;
+            position: relative;
+            
+            
         }
     }
 }
 
 // classes
-.small-height {
-    height: 2rem !important;
-}
-
-.medium-height {
-    height: 12rem !important;
+.custom-height {  
+    height: 11rem !important;
 }

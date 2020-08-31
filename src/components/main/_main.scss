@@ -1,7 +1,16 @@
 // main component
 @include theme(main, #b5f4fb);
 
+.main {
+
+    &__container {
+
+        margin-bottom: 3rem;
+    }
+}
+
 // presentation pic
 .rick-pic {
-    margin-top: 13.4%;
+    position: absolute;
+    top: 38vh;
 }

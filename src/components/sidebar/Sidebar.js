@@ -1,13 +1,10 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Filter from "../utilities/filter/Filter"
 
 function Sidebar() {
-
-
-
     return (
         <div className='sidebar'>
             <div className='sidebar__filters'>
@@ -15,12 +12,7 @@ function Sidebar() {
                 <Container>
                     <Row>
                         <Col>
-                            <Filter
-                                filterName='Characters'
-                                nameAttr='filter'
-                                checked={true}
-                      
-                            />
+                            <Filter filterName='Characters' nameAttr='filter' />
                             <Filter filterName='Locations' nameAttr='filter' />
                             <Filter filterName='Episodes' nameAttr='filter' />
                         </Col>

@@ -1,0 +1,32 @@
+// footer component
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: $blueRick;
+    width: 100%;
+    height: 2.5rem;
+    margin-top: -6vh;
+    z-index: 9999;
+
+    &__name {
+        @include text(left, 1rem, 500);
+        padding: 0.5rem;
+        color: $dark;
+    }
+
+    &__links {
+        &--repo {
+
+            text-decoration: none;
+
+            ion-icon {
+                font-size: 1.7rem;
+                padding: 0.35rem;
+                margin-right: 0.5rem;
+                color: $dark;
+            }
+        }
+    }
+}
