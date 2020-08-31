@@ -14,9 +14,8 @@ function Filter({
     isDisabled,
     filter,
     attribute,
-    search
+    search,
 }) {
-
     let handleFilterSelect = e => {
         let filter = e.target.id.toLowerCase()
         setFilterAction(filter)
@@ -25,7 +24,6 @@ function Filter({
 
     return (
         <div className='filter'>
-            
             <label htmlFor={filterName} className='mr-1'>
                 <input
                     type='radio'
@@ -36,7 +34,7 @@ function Filter({
                             ? handleFilterSelect
                             : handleRadio
                     }
-                    disabled={isDisabled || search !== ''}
+                    disabled={isDisabled || search !== ""}
                     checked={
                         filter === filterName.toLowerCase() ||
                         attribute === filterName.toLowerCase()
@@ -54,6 +52,18 @@ function mapState(state) {
         filter: state.search.filter,
         attribute: state.search.attribute,
     }
+}
+
+Filter.propTypes = {
+    filterName: PropTypes.string,
+    nameAttr: PropTypes.string,
+    handleRadio: PropTypes.func,
+    setFilterAction: PropTypes.func,
+    getDataAction: PropTypes.func,
+    isDisabled: PropTypes.string,
+    filter: PropTypes.string,
+    attribute: PropTypes.string,
+    search: PropTypes.string,
 }
 
 export default connect(mapState, { setFilterAction, getDataAction })(Filter)

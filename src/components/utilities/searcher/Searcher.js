@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-import Alert from "react-bootstrap/Alert"
 import Filter from "../filter/Filter"
+import PropTypes from "prop-types"
 
 import { connect } from "react-redux"
 
@@ -19,14 +19,14 @@ function Searcher({
     setAttributeAction,
     getDataAction,
     setDisplayAction,
-    search,
+    filter,
 }) {
     let [show, setShow] = useState(true)
     let [disable, setDisable] = useState(false)
 
     useEffect(() => {
         // if the filter selected is episodes, it disable's type attr
-        if (search.filter === "episodes") {
+        if (filter === "episodes") {
             setDisable(true)
         } else {
             setDisable(false)
@@ -60,9 +60,7 @@ function Searcher({
 
     return (
         <div className='searcher '>
-            <h4 className='searcher__title'>
-                {capitalize(search.filter, true)}
-            </h4>
+            <h4 className='searcher__title'>{capitalize(filter, true)}</h4>
             <Container>
                 <Row>
                     {/* searcher input */}
@@ -103,8 +101,16 @@ function Searcher({
 
 function mapState(state) {
     return {
-        search: state.search,
+        filter: state.search.filter,
     }
+}
+
+Searcher.propTypes = {
+    setSearchAction: PropTypes.func,
+    setAttributeAction: PropTypes.func,
+    getDataAction: PropTypes.func,
+    setDisplayAction: PropTypes.func,
+    filter: PropTypes.string,
 }
 
 export default connect(mapState, {

@@ -28,15 +28,20 @@ let client = new ApolloClient({
     errorPolicy: "ignore",
 })
 
+// query data
 let GET_DATA = "GET_DATA"
 let GET_DATA_SUCCESS = "GET_DATA_SUCCESS"
 let GET_DATA_ERROR = "GET_DATA_ERROR"
 
+// store data
 let GET_INPUT = "GET_INPUT"
 let GET_ATTRIBUTE = "GET_ATTRIBUTE"
 let GET_FILTER = "GET_FILTER"
-
 let GET_DISPLAY = "GET_DISPLAY"
+
+// apollo
+let APOLLO_ERROR = 'APOLLO_ERROR'
+
 
 // reducer
 export default function reducer(state = initialData, action) {
@@ -155,3 +160,14 @@ export let setDisplayAction = elem => dispatch => {
         payload: elem,
     })
 }
+
+// handle errors
+export let errorHandler = (dispatch) => onError((errors) => {
+    if (errors.networkError) {
+        dispatch({
+            type: APOLLO_ERROR,
+            payload: 'Sorry! what you are looking for is not found.'
+        })
+    }
+})
+

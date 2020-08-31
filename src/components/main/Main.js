@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import Searcher from "../utilities/searcher/Searcher"
 import Container from "react-bootstrap/Container"
+import PropTypes from 'prop-types';
+
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Card from "../utilities/card/Card"
@@ -56,6 +58,12 @@ function mapState(state) {
         display: state.search.display,
         filter: state.search.filter,
     }
+}
+
+Main.propTypes = {
+    array: PropTypes.array,
+    display: PropTypes.bool,
+    filter: PropTypes.string
 }
 
 export default connect(mapState)(Main)
