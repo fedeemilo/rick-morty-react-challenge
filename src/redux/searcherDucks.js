@@ -92,6 +92,7 @@ export let getDataAction = () => (dispatch, getState) => {
                 results {
                     id
                     name
+                   ${filter === "characters" ? "species" : ""}
                    ${filter === "characters" ? "image" : ""}
                    ${filter === "locations" ? "dimension" : ""}
                    ${filter === "episodes" ? "episode" : ""}
