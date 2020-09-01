@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 
 import { connect } from "react-redux"
@@ -60,7 +60,7 @@ Filter.propTypes = {
     handleRadio: PropTypes.func,
     setFilterAction: PropTypes.func,
     getDataAction: PropTypes.func,
-    isDisabled: PropTypes.string,
+    isDisabled: PropTypes.bool,
     filter: PropTypes.string,
     attribute: PropTypes.string,
     search: PropTypes.string,

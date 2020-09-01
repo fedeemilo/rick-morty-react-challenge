@@ -13,12 +13,12 @@ import Fade from "react-reveal/Fade"
 
 import { connect } from "react-redux"
 
-function Main({ array, display, filter }) {
+function Main({ obj, display, filter }) {
     let [filterResults, setFilterResults] = useState({})
 
     useEffect(() => {
-        setFilterResults(Object.assign(filterResults, array))
-    }, [array])
+        setFilterResults(Object.assign(filterResults, obj))
+    }, [obj, filterResults])
 
     return (
         <div className='main'>
@@ -28,7 +28,7 @@ function Main({ array, display, filter }) {
                 <Row>
                     {/* grid of cards */}
                     {display && Object.keys(filterResults).length !== 0 ? (
-                        filterResults[`${filter}`].results.sort().map(char => (
+                        filterResults.results.sort().map(char => (
                             <Col lg={3} key={char.id}>
                                 <Fade>
                                     <Card
@@ -54,14 +54,14 @@ function Main({ array, display, filter }) {
 
 function mapState(state) {
     return {
-        array: state.search.array,
         display: state.search.display,
         filter: state.search.filter,
+        obj: state.search.array[`${state.search.filter}`]
     }
 }
 
 Main.propTypes = {
-    array: PropTypes.array,
+    obj: PropTypes.object,
     display: PropTypes.bool,
     filter: PropTypes.string
 }

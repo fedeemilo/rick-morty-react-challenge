@@ -21,7 +21,7 @@ function Searcher({
     setDisplayAction,
     filter,
 }) {
-    let [show, setShow] = useState(true)
+    
     let [disable, setDisable] = useState(false)
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function Searcher({
         } else {
             setDisable(false)
         }
-    }, [search])
+    }, [filter])
 
     // listen to user's input
     let handleInput = e => {

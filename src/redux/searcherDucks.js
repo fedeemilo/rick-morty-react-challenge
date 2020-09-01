@@ -12,15 +12,15 @@ let initialData = {
     attribute: "name"
 }
 
-let errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
-        graphQLErrors.forEach(({ message, locations, path }) =>
-            console.log(
-                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            )
-        )
-    if (networkError) console.log(`[Network error]: ${networkError}`)
-})
+// let errorLink = onError(({ graphQLErrors, networkError }) => {
+//     if (graphQLErrors)
+//         graphQLErrors.forEach(({ message, locations, path }) =>
+//             console.log(
+//                 `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+//             )
+//         )
+//     if (networkError) console.log(`[Network error]: ${networkError}`)
+// })
 
 let client = new ApolloClient({
     uri: "https://rickandmortyapi.com/graphql",
@@ -114,17 +114,16 @@ export let getDataAction = () => (dispatch, getState) => {
             query,
             variables: { filter: obj },
         })
-        .then(({ data, error }) => {
-            if (error) {
-
-                dispatch({
-                    type: GET_DATA_ERROR,
-                    payload: error,
-                })
-            }
+        .then(({ data }) => {
             dispatch({
                 type: GET_DATA_SUCCESS,
                 payload: data,
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_DATA_ERROR,
+                payload: err,
             })
         })
 }

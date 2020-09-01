@@ -18,13 +18,15 @@ function Footer() {
                     <a
                         href={githubRepo}
                         className='footer__links--repo'
-                        target='_blank'>
+                        target='_blank'
+                        rel="noopener noreferrer">
                         <ion-icon name='logo-github'></ion-icon>
                     </a>
                     <a
                         href={myPortfolio}
                         className='footer__links--repo'
-                        target='_blank'>
+                        target='_blank'
+                        rel="noopener noreferrer">
                         <ion-icon name='globe-outline'></ion-icon>
                     </a>
                 </div>

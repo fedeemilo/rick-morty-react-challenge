@@ -1,5 +1,9 @@
 # Rick & Morty Challenge
 
+### App Demo
+
+https://rickmorty-react.vercel.app/
+
 ### Starting the application
 
 - git clone https://github.com/fedeemilo/rick-morty-react-challenge.git
