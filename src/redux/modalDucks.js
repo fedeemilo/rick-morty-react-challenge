@@ -104,7 +104,9 @@ export let getModalDataAction = () => (dispatch, getState) => {
                 type
                 gender
                 species 
-                image            
+                image   
+                status    
+               
             }
         }
     `

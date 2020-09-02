@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react"
+
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+
 import Fade from "react-reveal/Fade"
 import { cleanStateAction } from "../../../redux/modalDucks"
 
 import { connect } from "react-redux"
 
-function ModalChar({ modal, show, onHide, char ,cleanStateAction}) {
+function ModalChar({ modal, show, onHide, char, cleanStateAction }) {
     let overlay = document.querySelector(".overlay")
     let modalBox = document.querySelector(".modal")
     useEffect(() => {
@@ -35,12 +37,30 @@ function ModalChar({ modal, show, onHide, char ,cleanStateAction}) {
                             <div className='modal__body--image'>
                                 <img src={char.image} alt='charImg' />
                             </div>
-                            <Container>
-                                <Row>
-                                    <Col lg='6'></Col>
-                                    <Col lg='6'></Col>
-                                </Row>
-                            </Container>
+
+                            <div class='modal__body--info'>
+                                <Container className='mx-auto'>
+                                    <Row>
+                                        <Col lg='4'>
+                                            <p>
+                                                <span className='info-name'>Type:</span>{" "}
+                                                {char.type !== "" ? char.type : "none"}
+                                            </p>
+                                            <p>
+                                                <span className='info-name'>Gender:</span> {char.gender}
+                                            </p>
+                                        </Col>
+                                        <Col lg='4'>
+                                            <p>
+                                                <span className='info-name'>Species:</span> {char.species}
+                                            </p>
+                                            <p>
+                                                <span className='info-name'>Status:</span> {char.status}
+                                            </p>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </div>
                         </div>
                     </Fade>
                 </div>
