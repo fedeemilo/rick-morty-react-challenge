@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import Button from "react-bootstrap/Button"
 import Filter from "../filter/Filter"
 import PropTypes from "prop-types"
 
@@ -12,6 +13,7 @@ import {
     setAttributeAction,
     getDataAction,
     setDisplayAction,
+    setResetAction,
 } from "../../../redux/searcherDucks"
 
 function Searcher({
@@ -19,10 +21,11 @@ function Searcher({
     setAttributeAction,
     getDataAction,
     setDisplayAction,
+    setResetAction,
     filter,
 }) {
-    
     let [disable, setDisable] = useState(false)
+    let [btnDisable, setBtnDisable] = useState(true)
 
     useEffect(() => {
         // if the filter selected is episodes, it disable's type attr
@@ -36,9 +39,14 @@ function Searcher({
     // listen to user's input
     let handleInput = e => {
         let input = e.target.value
-
+        // set the search attribute from store
         setSearchAction(input)
+        // new action query with data provided by the user
         getDataAction()
+        // active reset button
+        setBtnDisable(false)
+        // enable reset button
+        setResetAction(false)
 
         // search doesn't start's until user types 3rd char
         if (input.length >= 3) {
@@ -51,6 +59,15 @@ function Searcher({
     // user select name attribute radio button
     let handleRadio = e => {
         setAttributeAction(e.target.id.toLowerCase())
+    }
+    
+    // handle reset button to restart the search process
+    let handleResetButton = e => {
+        let searcher = document.querySelector(".searcher__input")
+        setBtnDisable(true)
+        setResetAction(true)
+        setSearchAction("")
+        searcher.value = ""
     }
 
     // capitalize string
@@ -70,7 +87,13 @@ function Searcher({
                         onChange={handleInput}
                         placeholder='Enter your search...'
                     />
-
+                    <Button
+                        variant='outline-primary'
+                        className='ml-2 search__button'
+                        onClick={handleResetButton}
+                        disabled={btnDisable}>
+                        Reset
+                    </Button>{" "}
                     {/* searcher radio buttons (name or type) */}
                     <Col lg='2'>
                         {/* name */}
@@ -118,4 +141,6 @@ export default connect(mapState, {
     setAttributeAction,
     getDataAction,
     setDisplayAction,
+    setResetAction,
+    
 })(Searcher)

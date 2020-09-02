@@ -1,21 +1,23 @@
 import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 
-function Card({ name, image, dimension, episode }) {
+function Card({ name, image, dimension, episode, handleClickCard, id }) {
+    
     // manipulate height of card depending on content
     useEffect(() => {
         let card = document.querySelectorAll(".card")
-        console.log(card)
-        card[0].classList.add("first-card")
 
-        // custom location and episode card
+        // first result
+        card[0].classList.add("first-card")
+        // custom height on location and episode card
         if (dimension !== undefined || episode !== undefined) {
             card.forEach(c => c.classList.add("custom-height"))
         }
     })
 
+
     return (
-        <div className='card'>
+        <div id={id} className='card' onClick={handleClickCard} >
             {/* card header */}
             <div className='card__header'>
                 {/* nombre */}
@@ -28,12 +30,13 @@ function Card({ name, image, dimension, episode }) {
 
                 {/* dimension */}
                 {dimension !== undefined ? (
-                    <h4 className='text-center text-primary h5'>{dimension}</h4>
+                   
+                    <p className='text-center font-italic'>{dimension}</p>
                 ) : null}
 
                 {/* episode */}
                 {episode !== undefined ? (
-                    <h4 className='text-center text-primary'>{episode}</h4>
+                    <h4 className='text-center mt-3 h5'>{episode}</h4>
                 ) : null}
             </div>
         </div>
@@ -45,6 +48,7 @@ Card.propTypes = {
     image: PropTypes.string,
     dimension: PropTypes.string,
     episode: PropTypes.string,
+    handleClickCard: PropTypes.func
 }
 
 export default Card

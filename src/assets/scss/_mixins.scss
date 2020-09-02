@@ -30,12 +30,12 @@
 }
 
 // height of card depending on content
-@mixin customHeight($height, $card: false) {
+@mixin flexCenter($flow , $isFlow: false) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-	height: $height;
-
-	@if $card {
-		height: $height / 2;
+	@if ($isFlow) {
+		flex-flow: $flow;
 	}
-
 }

@@ -1,9 +1,11 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import searchReducer, { getDataAction } from './searcherDucks'
+import modalReducer, { getModalDataAction } from './modalDucks'
 
 let rootReducer = combineReducers({
-	search: searchReducer
+	search: searchReducer,
+	modal: modalReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -14,6 +16,7 @@ export default function generateStore() {
 
 	// action executions
 	getDataAction()(store.dispatch, store.getState)
+	getModalDataAction()(store.dispatch, store.getState)
 
 	return store
 }

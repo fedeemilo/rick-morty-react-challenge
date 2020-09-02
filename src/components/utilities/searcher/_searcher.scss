@@ -1,11 +1,10 @@
 // searcher component
 
 .searcher {
-	width: 56rem;
 
 	// input search by name or type
 	&__input {
-		@include box(92.8%, 2.2rem, 0.3rem, 1.2rem);
+		@include box(89.7%, 2.2rem, 0.3rem, 1.2rem);
 		border: 0.02rem solid rgb(105, 103, 103);
 		margin-top: .2rem;
 	}

@@ -1,5 +1,4 @@
 import ApolloClient, { gql } from "apollo-boost"
-import { onError } from "apollo-link-error"
 import { InMemoryCache } from "apollo-cache-inmemory"
 
 // constants
@@ -9,23 +8,15 @@ let initialData = {
     search: "",
     filter: "characters",
     fetching: false,
-    attribute: "name"
+    attribute: "name",
+    reset: false,
 }
 
-// let errorLink = onError(({ graphQLErrors, networkError }) => {
-//     if (graphQLErrors)
-//         graphQLErrors.forEach(({ message, locations, path }) =>
-//             console.log(
-//                 `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-//             )
-//         )
-//     if (networkError) console.log(`[Network error]: ${networkError}`)
-// })
+let URI = "https://rickandmortyapi.com/graphql"
 
 let client = new ApolloClient({
-    uri: "https://rickandmortyapi.com/graphql",
-    cache: new InMemoryCache(),
-    errorPolicy: "ignore",
+    uri: URI,
+    cache: new InMemoryCache()
 })
 
 // query data
@@ -38,10 +29,7 @@ let GET_INPUT = "GET_INPUT"
 let GET_ATTRIBUTE = "GET_ATTRIBUTE"
 let GET_FILTER = "GET_FILTER"
 let GET_DISPLAY = "GET_DISPLAY"
-
-// apollo
-let APOLLO_ERROR = 'APOLLO_ERROR'
-
+let GET_RESET = "GET_RESET"
 
 // reducer
 export default function reducer(state = initialData, action) {
@@ -60,6 +48,8 @@ export default function reducer(state = initialData, action) {
             return { ...state, filter: action.payload, fetching: false }
         case GET_DISPLAY:
             return { ...state, display: action.payload, fetching: false }
+         case GET_RESET:
+             return {...state, reset: action.payload, fetching: false}
         default:
             return state
     }
@@ -116,6 +106,7 @@ export let getDataAction = () => (dispatch, getState) => {
             variables: { filter: obj },
         })
         .then(({ data }) => {
+            localStorage.search = JSON.stringify(data)
             dispatch({
                 type: GET_DATA_SUCCESS,
                 payload: data,
@@ -161,13 +152,10 @@ export let setDisplayAction = elem => dispatch => {
     })
 }
 
-// handle errors
-export let errorHandler = (dispatch) => onError((errors) => {
-    if (errors.networkError) {
-        dispatch({
-            type: APOLLO_ERROR,
-            payload: 'Sorry! what you are looking for is not found.'
-        })
-    }
-})
-
+// set the reset of the search
+export let setResetAction = elem => dispatch => {
+    dispatch({
+        type: GET_RESET,
+        payload: elem
+    })
+}
