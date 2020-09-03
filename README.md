@@ -1,4 +1,4 @@
-# Rick & Morty Challenge 
+# Rick & Morty Challenge (React)
 
 ### App Demo
 
