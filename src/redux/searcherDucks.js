@@ -4,12 +4,13 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 // constants
 let initialData = {
     display: false,
-    array: [],
+    object: [],
     search: "",
     filter: "characters",
     fetching: false,
     attribute: "name",
     reset: false,
+    newPage: 1,
 }
 
 let URI = "https://rickandmortyapi.com/graphql"
@@ -31,6 +32,11 @@ let GET_FILTER = "GET_FILTER"
 let GET_DISPLAY = "GET_DISPLAY"
 let GET_RESET = "GET_RESET"
 
+// update the page
+let UPDATE_PAGE = "UPDATE_PAGE"
+
+let NEW_PAGE = "ITEM_PAGE"
+
 // clean store
 let CLEAN_STATE = "CLEAN_STATE"
 
@@ -42,7 +48,7 @@ export default function reducer(state = initialData, action) {
         case GET_DATA_ERROR:
             return { ...state, fetching: false, error: action.payload }
         case GET_DATA_SUCCESS:
-            return { ...state, array: action.payload, fetching: false }
+            return { ...state, object: action.payload, fetching: false }
         case GET_INPUT:
             return { ...state, search: action.payload, fetching: false }
         case GET_ATTRIBUTE:
@@ -54,7 +60,9 @@ export default function reducer(state = initialData, action) {
         case GET_RESET:
             return { ...state, reset: action.payload, fetching: false }
         case CLEAN_STATE:
-            return {...state, array: []}
+            return { ...state, object: {} }
+        case NEW_PAGE:
+            return { ...state, newPage: action.payload }
         default:
             return state
     }
@@ -65,7 +73,6 @@ export default function reducer(state = initialData, action) {
 // get data from rick and morty api
 export let getDataAction = () => (dispatch, getState) => {
     let filter = getState().search.filter
-
     // set function of query depending on the selected filter
     let graphFilter = () => {
         switch (filter) {
@@ -82,8 +89,13 @@ export let getDataAction = () => (dispatch, getState) => {
 
     // dynamic query
     let query = gql`
-        query($filter: ${graphFilter()}) {
-            ${filter}(filter: $filter) {
+        query($filter: ${graphFilter()}, $page: Int) {
+            ${filter}(filter: $filter, page: $page) {
+                info {
+                    pages
+                    next
+                    prev
+                }
                 results {
                     id
                     name
@@ -100,15 +112,15 @@ export let getDataAction = () => (dispatch, getState) => {
         type: GET_DATA,
     })
 
-    // obtain search and attribute from the store
-    let { search, attribute } = getState().search
+    // obtain search, attribute and newPage from the store
+    let { search, attribute, newPage } = getState().search
     let obj = {}
     obj[attribute] = search
 
     return client
         .query({
             query,
-            variables: { filter: obj },
+            variables: { filter: obj, page: newPage },
         })
         .then(({ data }) => {
             localStorage.search = JSON.stringify(data)
@@ -168,6 +180,16 @@ export let setResetAction = elem => dispatch => {
 // clean the state
 export let cleanStateAction = () => dispatch => {
     dispatch({
-        type: CLEAN_STATE
+        type: CLEAN_STATE,
     })
+}
+
+// go to the number page selected
+export let itemPageAction = elem => (dispatch, getState) => {
+    dispatch({
+        type: NEW_PAGE,
+        payload: elem,
+    })
+
+    getDataAction()(dispatch, getState)
 }
