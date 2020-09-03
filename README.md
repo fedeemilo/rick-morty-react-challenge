@@ -26,7 +26,7 @@ https://rickmorty-react.vercel.app/
 
 - npm install or yarn
 
-- npm start to run the app
+- npm start (to run the app)
 
 ## Screenshots
 
