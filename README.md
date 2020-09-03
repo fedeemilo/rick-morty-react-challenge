@@ -26,6 +26,8 @@ https://rickmorty-react.vercel.app/
 
 - npm start to run the app
 
+## Screenshots
+
 ### App home screen
 
 ![Optional Text](./src/assets/img/rickmorty-shot1.png)
