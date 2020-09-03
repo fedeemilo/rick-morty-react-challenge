@@ -20,13 +20,13 @@ https://rickmorty-react.vercel.app/
 
 ### Starting the application
 
-- git clone https://github.com/fedeemilo/rick-morty-react-challenge.git
+- git clone https://github.com/fedeemilo/rick-morty-react-challenge.git -> clone repository
 
-- cd rick-morty-react-challenge
+- cd rick-morty-react-challenge -> change directory to the project
 
-- npm install or yarn
+- npm install or yarn -> install dependencies
 
-- npm start (to run the app)
+- npm start -> run the app
 
 ## Screenshots
 
