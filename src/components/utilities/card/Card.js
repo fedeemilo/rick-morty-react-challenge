@@ -21,7 +21,7 @@ function Card({ name, image, dimension, episode, handleClickCard, id }) {
             {/* card header */}
             <div className='card__header'>
                 {/* nombre */}
-                <h4>{name}</h4>
+                <h4 className='text-primary'>{name}</h4>
             </div>
             {/* card body */}
             <div className='card__body'>

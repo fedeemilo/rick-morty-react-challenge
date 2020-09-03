@@ -36,7 +36,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"deploy": "npm run build && now"
+		"deploy": "npm run build && now && now alias https://rickmorty-react-challenge.fedeemilo91.vercel.app https://rickmorty-react.vercel.app"
 	},
 	"eslintConfig": {
 		"extends": "react-app"

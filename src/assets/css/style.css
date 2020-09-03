@@ -92,16 +92,16 @@
 }
 
 .first-card {
-  border: 1px solid #0000FF;
+  border: 1px solid #4545df;
   -webkit-transition: 500ms;
   transition: 500ms;
-  -webkit-box-shadow: 0px 0px 12px 2px #0000FF;
-          box-shadow: 0px 0px 12px 2px #0000FF;
+  -webkit-box-shadow: 0px 0px 12px 2px #4545df;
+          box-shadow: 0px 0px 12px 2px #4545df;
 }
 
 .first-card:hover {
-  -webkit-box-shadow: 0px 0px 34px 4px #0000FF;
-          box-shadow: 0px 0px 34px 4px #0000FF;
+  -webkit-box-shadow: 0px 0px 34px 4px #4545df;
+          box-shadow: 0px 0px 34px 4px #4545df;
 }
 
 .filter {
@@ -223,9 +223,9 @@
 
 .overlay .modal-position .modal__header h2 {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 2.4rem;
   font-weight: 700;
-  margin-top: 1.6rem;
+  margin-top: 0.95rem;
 }
 
 .overlay .modal-position .modal__body {
@@ -233,7 +233,7 @@
 }
 
 .overlay .modal-position .modal__body--image {
-  margin: -.4rem auto;
+  margin: -0.4rem auto;
   width: 100%;
   height: 9.5rem;
   display: -webkit-box;
@@ -281,6 +281,89 @@
 
 .overlay .modal-position .modal__body--info p .info-name {
   color: #3c3e44;
+}
+
+.overlayEpiLoc {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.overlayEpiLoc .modal-position {
+  width: 50rem;
+  height: 27rem;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 100%;
+  background: #0bd7ee;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__header h2 {
+  color: #3c3e44;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__body {
+  margin-top: 0.1rem;
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__body--info p {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #3c3e44;
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__body--info p .info-name {
+  color: #4545df;
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__body--chars {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  margin-top: -2%;
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__body--chars .card {
+  margin-left: 0.4rem;
+  height: 14vw !important;
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__body--chars .card__header h4 {
+  font-size: 1.2vw;
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__body--chars .card__body img {
+  height: 90%;
+}
+
+.overlayEpiLoc .modal-position .modalEpiLoc__body--chars .card:hover {
+  cursor: default;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .footer {

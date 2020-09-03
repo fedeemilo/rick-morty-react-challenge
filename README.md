@@ -33,3 +33,15 @@ https://rickmorty-react.vercel.app/
 ### Search process
 
 ![Optional Text](./src/assets/img/rickmorty-shot2.png)
+
+### Select character modal
+
+![Optional Text](./src/assets/img/rickmorty-shot3.png)
+
+### Select location modal
+
+![Optional Text](./src/assets/img/rickmorty-shot4.png)
+
+### Select episode modal
+
+![Optional Text](./src/assets/img/rickmorty-shot5.png)

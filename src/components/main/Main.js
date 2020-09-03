@@ -11,7 +11,11 @@ import Fade from "react-reveal/Fade"
 import {
     setObjectIdAction,
     getCharAction,
+    getLocationAction,
+    getEpisodeAction,
     setDisplayCharAction,
+    setDisplayLocationAction,
+    setDisplayEpisodeAction
 } from "../../redux/modalDucks"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
@@ -21,13 +25,21 @@ function Main({
     obj,
     display,
     reset,
+    filter,
     setObjectIdAction,
     getCharAction,
+    getLocationAction,
+    getEpisodeAction,
     character,
-    setDisplayCharAction
+    episode,
+    location,
+    setDisplayCharAction,
+    setDisplayLocationAction,
+    setDisplayEpisodeAction
 }) {
     let [filterResults, setFilterResults] = useState({})
     let [modalShow, setModalShow] = useState(false)
+    let [modalEpiLocShow, setModalEpiLocShow] = useState(false)
     let [currentId, setCurrentId] = useState("")
 
     useEffect(() => {
@@ -38,11 +50,26 @@ function Main({
     let handleClickCard = e => {
         setCurrentId(e.currentTarget.id)
         setObjectIdAction(e.currentTarget.id)
-        // obtain data for modal completion
-        getCharAction()
-        // display modal
-        setModalShow(true)
-        setDisplayCharAction(true)
+        
+        switch (filter) {
+            case "characters":
+                // obtain data for modal completion
+                getCharAction()
+                // display modal
+                setModalShow(true)
+                setDisplayCharAction(true)
+                break
+            case "locations":
+                getLocationAction()
+                setModalEpiLocShow(true)
+                setDisplayLocationAction(true)
+                break
+            case "episodes":
+                getEpisodeAction()
+                setModalEpiLocShow(true)
+                setDisplayEpisodeAction(true)
+                break
+        }
     }
 
     return (
@@ -65,11 +92,21 @@ function Main({
                                         handleClickCard={handleClickCard}
                                     />
                                 </Fade>
+                                {/* modal for character */}
                                 <ModalChar
                                     id={currentId}
                                     char={character}
                                     show={modalShow}
                                     onHide={() => setModalShow(false)}
+                                />
+                                {/* modal for location or episode */}
+                                <ModalEpiLoc
+                                    idEpiLoc={currentId}
+                                    epi={episode}
+                                    loc={location}
+                                    filter={filter}
+                                    showEpiLoc={modalEpiLocShow}
+                                    onHideEpiLoc={() => setModalEpiLocShow(false)}
                                 />
                             </Col>
                         ))
@@ -92,6 +129,8 @@ function mapState(state) {
         obj: state.search.array[`${state.search.filter}`],
         reset: state.search.reset,
         character: state.modal.objectChar.character,
+        episode: state.modal.objectEpisode.episode,
+        location: state.modal.objectLocation.location
     }
 }
 
@@ -106,4 +145,8 @@ export default connect(mapState, {
     setObjectIdAction,
     getCharAction,
     setDisplayCharAction,
+    setDisplayLocationAction,
+    setDisplayEpisodeAction,
+    getLocationAction,
+    getEpisodeAction,
 })(Main)

@@ -1,25 +1,25 @@
-// modal component
+// char modal component
 .overlay {
-    position: fixed; 
-    width: 100%; 
-    height: 100%; 
+    position: fixed;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
-    cursor: pointer; 
+    cursor: pointer;
 
     .modal-position {
         @include box(38rem, 29.6rem, 10px, 2rem);
-        background:  $blueRick;
+        background: $blueRick;
         position: absolute;
         top: 50%;
         left: 50%;
         font-size: 50px;
         transform: translate(-50%, -50%);
-        
+
         .modal {
             display: flex;
             flex-direction: column;
@@ -32,22 +32,21 @@
                 text-align: center;
 
                 h2 {
-                    @include text(center, 1.6rem, 700);
-                    margin-top: 1.6rem;
+                    @include text(center, 2.4rem, 700);
+                    margin-top: 0.95rem;
                 }
             }
 
             &__body {
                 height: 68%;
-                
+
                 &--image {
-                    margin: -.4rem auto;
+                    margin: -0.4rem auto;
                     width: 100%;
                     height: 9.5rem;
                     @include flexCenter(column nowrap, $isFlow: true);
-                    
+
                     img {
-                        
                         object-fit: contain;
                         width: 100%;
                     }
@@ -57,24 +56,104 @@
                     margin-top: 6.8rem;
                     display: flex;
                     justify-content: center;
-                    
+
                     .info-col2 {
                         margin-left: 3.4rem;
                     }
 
                     p {
                         @include text(left, 1rem, 700);
-                        color: #4545df;
+                        color: $blue;
                         line-height: 1rem;
 
                         .info-name {
                             color: $primary;
                         }
                     }
+                }
+            }
+        }
+    }
+}
 
+// episode|location modal component
+.overlayEpiLoc {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+
+    // position modal on center
+    .modal-position {
+        @include box(50rem, 27rem, 10px, 2rem);
+        max-width: 100%;
+        background: $blueRick;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 50px;
+        transform: translate(-50%, -50%);
+
+        // modal episode/location
+        .modalEpiLoc {
+            // header modal
+            &__header {
+                h2 {
+                    color: $primary;
+                    @include text(center, 2rem, 700);
+                }
+            }
+
+            // body modal
+            &__body {
+                margin-top: 0.1rem;
+                &--info {
+                    p {
+                        @include text(center, 1.5rem, 600);
+                        color: $primary;
+
+                        .info-name {
+                            color: $blue;
+                        }
+                    }
                 }
 
+                &--chars {
+                    display: flex;
+                    justify-content: center;
+                    flex-flow: row nowrap;
+                    margin-top: -2%;
 
+                    .card {                                    
+                        margin-left: 0.4rem;
+                        height: 14vw !important;
+
+                        &__header {
+                            h4 {
+                                font-size: 1.2vw;                                                   
+                                
+                            }
+                        }
+
+                        &__body {
+
+                            img {
+                                height: 90%;
+                            }
+                        }
+
+                        &:hover {
+                            cursor: default;
+                            box-shadow: none;
+                        }
+                    }
+                }
             }
         }
     }

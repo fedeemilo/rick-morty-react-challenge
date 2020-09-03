@@ -3,12 +3,13 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 
 let initialData = {
     displayChar: false,
+    displayLocation: false,
+    displayEpisode: false,
     objectId: "",
     objectChar: {},
     objectLocation: {},
     objectEpisode: {},
     fetching: false,
-    filter: "character",
 }
 
 let URI = "https://rickandmortyapi.com/graphql"
@@ -31,7 +32,11 @@ let EPISODE_SUCCESS = "EPISODE_SUCCESS"
 let EPISODE_ERROR = "EPISODE_ERROR"
 let GET_ID = "GET_ID"
 let GET_DISPLAY_CHAR = "GET_DISPLAY_CHAR"
-let CLEAN_STATE = "CLEAN_STATE"
+let GET_DISPLAY_LOCATION = "GET_DISPLAY_LOCATION"
+let GET_DISPLAY_EPISODE = "GET_DISPLAY_EPISODE"
+let CLEAN_CHAR = "CLEAN_CHAR"
+let CLEAN_LOCATION = "CLEAN_LOCATION"
+let CLEAN_EPISODE = "CLEAN_EPISODE"
 
 /* reducer */
 export default function reducer(state = initialData, action) {
@@ -74,7 +79,7 @@ export default function reducer(state = initialData, action) {
             return { ...state, fetching: false, error: action.payload }
         case GET_ID:
             return { ...state, fetching: false, objectId: action.payload }
-        case CLEAN_STATE:
+        case CLEAN_CHAR:
             return {
                 ...state,
                 objectChar: Object.assign(
@@ -83,10 +88,40 @@ export default function reducer(state = initialData, action) {
                     state.objectChar
                 ),
             }
+        case CLEAN_LOCATION:
+            return {
+                ...state,
+                objectLocation: Object.assign(
+                    {},
+                    delete state.objectLocation.location,
+                    state.objectLocation
+                ),
+            }
+        case CLEAN_EPISODE:
+            return {
+                ...state,
+                objectEpisode: Object.assign(
+                    {},
+                    delete state.objectEpisode.episode,
+                    state.objectEpisode
+                ),
+            }
         case GET_DISPLAY_CHAR:
             return {
                 ...state,
                 displayChar: action.payload,
+                fetching: false,
+            }
+        case GET_DISPLAY_LOCATION:
+            return {
+                ...state,
+                displayLocation: action.payload,
+                fetching: false,
+            }
+        case GET_DISPLAY_EPISODE:
+            return {
+                ...state,
+                displayEpisode: action.payload,
                 fetching: false,
             }
         default:
@@ -150,6 +185,7 @@ export let getLocationAction = () => (dispatch, getState) => {
                 dimension
                 residents {
                     name
+                    image
                 }
             }
         }
@@ -190,6 +226,7 @@ export let getEpisodeAction = () => (dispatch, getState) => {
                 episode
                 characters {
                     name
+                    image
                 }
             }
         }
@@ -218,6 +255,7 @@ export let getEpisodeAction = () => (dispatch, getState) => {
         })
 }
 
+// set the id of the card selected action
 export let setObjectIdAction = elem => dispatch => {
     dispatch({
         type: GET_ID,
@@ -225,16 +263,50 @@ export let setObjectIdAction = elem => dispatch => {
     })
 }
 
-export let cleanStateAction = id => dispatch => {
+// clean char action
+export let cleanCharAction = id => dispatch => {
     dispatch({
-        type: CLEAN_STATE,
+        type: CLEAN_CHAR,
         payload: id,
     })
 }
 
+// clean location action
+export let cleanLocationAction = id => dispatch => {
+    dispatch({
+        type: CLEAN_LOCATION,
+        payload: id,
+    })
+}
+
+// clean episode action
+export let cleanEpisodeAction = id => dispatch => {
+    dispatch({
+        type: CLEAN_EPISODE,
+        payload: id,
+    })
+}
+
+// set display of CHAR modal action
 export let setDisplayCharAction = elem => dispatch => {
     dispatch({
         type: GET_DISPLAY_CHAR,
+        payload: elem,
+    })
+}
+
+// set display of LOCATION modal action
+export let setDisplayLocationAction = elem => dispatch => {
+    dispatch({
+        type: GET_DISPLAY_LOCATION,
+        payload: elem,
+    })
+}
+
+// set display of EPISODE modal action
+export let setDisplayEpisodeAction = elem => dispatch => {
+    dispatch({
+        type: GET_DISPLAY_EPISODE,
         payload: elem,
     })
 }

@@ -1,7 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import searchReducer, { getDataAction } from './searcherDucks'
-import modalReducer, { getCharAction } from './modalDucks'
+import modalReducer from './modalDucks'
 
 let rootReducer = combineReducers({
 	search: searchReducer,
@@ -16,7 +16,6 @@ export default function generateStore() {
 
 	// action executions
 	getDataAction()(store.dispatch, store.getState)
-	getCharAction()(store.dispatch, store.getState)
 
 	return store
 }
