@@ -10,6 +10,8 @@ https://rickmorty-react.vercel.app/
 
 - ES6
 
+- Redux
+
 - GraphQL with Apollo Client
 
 - React-Bootstrap
