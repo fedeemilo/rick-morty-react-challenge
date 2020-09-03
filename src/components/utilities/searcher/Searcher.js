@@ -14,6 +14,7 @@ import {
     getDataAction,
     setDisplayAction,
     setResetAction,
+    cleanStateAction
 } from "../../../redux/searcherDucks"
 
 function Searcher({
@@ -22,6 +23,7 @@ function Searcher({
     getDataAction,
     setDisplayAction,
     setResetAction,
+    cleanStateAction,
     filter,
 }) {
     let [disable, setDisable] = useState(false)
@@ -66,6 +68,7 @@ function Searcher({
         let searcher = document.querySelector(".searcher__input")
         setBtnDisable(true)
         setResetAction(true)
+        cleanStateAction()
         setSearchAction("")
         searcher.value = ""
     }
@@ -142,5 +145,6 @@ export default connect(mapState, {
     getDataAction,
     setDisplayAction,
     setResetAction,
+    cleanStateAction
     
 })(Searcher)

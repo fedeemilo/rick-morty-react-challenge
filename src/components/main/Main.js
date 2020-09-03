@@ -8,14 +8,27 @@ import ModalChar from "../utilities/modals/ModalChar"
 import ModalEpiLoc from "../utilities/modals/ModalEpiLoc"
 import Zoom from "react-reveal/Zoom"
 import Fade from "react-reveal/Fade"
-import { setObjectIdAction, getModalDataAction } from "../../redux/modalDucks"
+import {
+    setObjectIdAction,
+    getCharAction,
+    setDisplayCharAction,
+} from "../../redux/modalDucks"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import Rick from "../../assets/img/rick-nobg.png"
 
-function Main({ obj, display, reset, setObjectIdAction, getModalDataAction, character }) {
+function Main({
+    obj,
+    display,
+    reset,
+    setObjectIdAction,
+    getCharAction,
+    character,
+    setDisplayCharAction
+}) {
     let [filterResults, setFilterResults] = useState({})
     let [modalShow, setModalShow] = useState(false)
+    let [currentId, setCurrentId] = useState("")
 
     useEffect(() => {
         setFilterResults(Object.assign(filterResults, obj))
@@ -23,11 +36,13 @@ function Main({ obj, display, reset, setObjectIdAction, getModalDataAction, char
 
     // show modal if user click's a card
     let handleClickCard = e => {
+        setCurrentId(e.currentTarget.id)
         setObjectIdAction(e.currentTarget.id)
+        // obtain data for modal completion
+        getCharAction()
         // display modal
         setModalShow(true)
-        // obtain data for modal completion
-        getModalDataAction()
+        setDisplayCharAction(true)
     }
 
     return (
@@ -48,9 +63,10 @@ function Main({ obj, display, reset, setObjectIdAction, getModalDataAction, char
                                         dimension={char.dimension}
                                         episode={char.episode}
                                         handleClickCard={handleClickCard}
-                                        />
+                                    />
                                 </Fade>
                                 <ModalChar
+                                    id={currentId}
                                     char={character}
                                     show={modalShow}
                                     onHide={() => setModalShow(false)}
@@ -75,7 +91,7 @@ function mapState(state) {
         filter: state.search.filter,
         obj: state.search.array[`${state.search.filter}`],
         reset: state.search.reset,
-        character: state.modal.object.character
+        character: state.modal.objectChar.character,
     }
 }
 
@@ -84,9 +100,10 @@ Main.propTypes = {
     display: PropTypes.bool,
     filter: PropTypes.string,
     reset: PropTypes.bool,
-
 }
 
-export default connect(mapState, { setObjectIdAction, getModalDataAction })(
-    Main
-)
+export default connect(mapState, {
+    setObjectIdAction,
+    getCharAction,
+    setDisplayCharAction,
+})(Main)

@@ -16,7 +16,7 @@ let URI = "https://rickandmortyapi.com/graphql"
 
 let client = new ApolloClient({
     uri: URI,
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
 })
 
 // query data
@@ -30,6 +30,9 @@ let GET_ATTRIBUTE = "GET_ATTRIBUTE"
 let GET_FILTER = "GET_FILTER"
 let GET_DISPLAY = "GET_DISPLAY"
 let GET_RESET = "GET_RESET"
+
+// clean store
+let CLEAN_STATE = "CLEAN_STATE"
 
 // reducer
 export default function reducer(state = initialData, action) {
@@ -48,8 +51,10 @@ export default function reducer(state = initialData, action) {
             return { ...state, filter: action.payload, fetching: false }
         case GET_DISPLAY:
             return { ...state, display: action.payload, fetching: false }
-         case GET_RESET:
-             return {...state, reset: action.payload, fetching: false}
+        case GET_RESET:
+            return { ...state, reset: action.payload, fetching: false }
+        case CLEAN_STATE:
+            return {...state, array: []}
         default:
             return state
     }
@@ -156,6 +161,13 @@ export let setDisplayAction = elem => dispatch => {
 export let setResetAction = elem => dispatch => {
     dispatch({
         type: GET_RESET,
-        payload: elem
+        payload: elem,
+    })
+}
+
+// clean the state
+export let cleanStateAction = () => dispatch => {
+    dispatch({
+        type: CLEAN_STATE
     })
 }

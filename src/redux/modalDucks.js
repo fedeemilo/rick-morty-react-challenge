@@ -2,11 +2,13 @@ import ApolloClient, { gql } from "apollo-boost"
 import { InMemoryCache } from "apollo-cache-inmemory"
 
 let initialData = {
-    display: false,
+    displayChar: false,
     objectId: "",
-    object: {},
+    objectChar: {},
+    objectLocation: {},
+    objectEpisode: {},
     fetching: false,
-    filter: "",
+    filter: "character",
 }
 
 let URI = "https://rickandmortyapi.com/graphql"
@@ -19,29 +21,41 @@ let client = new ApolloClient({
 /* constants */
 
 // query data
-let MODAL_DATA = "GET_DATA"
-let MODAL_DATA_SUCCESS = "GET_DATA_SUCCESS"
-let MODAL_DATA_ERROR = "GET_DATA_ERROR"
-let GET_ID = 'GET_ID'
-let CLEAN_STATE = 'CLEAN_STATE'
+let CHAR = "CHAR"
+let CHAR_SUCCESS = "CHAR_SUCCESS"
+let CHAR_ERROR = "CHAR_ERROR"
+let GET_ID = "GET_ID"
+let GET_DISPLAY_CHAR = 'GET_DISPLAY_CHAR'
+let CLEAN_STATE = "CLEAN_STATE"
 
 /* reducer */
 export default function reducer(state = initialData, action) {
     switch (action.type) {
-        case MODAL_DATA:
+        case CHAR:
             return { ...state, fetching: true }
-        case MODAL_DATA_SUCCESS:
+        case CHAR_SUCCESS:
             return {
                 ...state,
                 fetching: false,
-                object: Object.assign(state.object, action.payload),
+                objectChar: Object.assign(state.objectChar, action.payload),
             }
-        case MODAL_DATA_ERROR:
+        case CHAR_ERROR:
             return { ...state, fetching: false, error: action.payload }
         case GET_ID:
-            return {...state, fetching: false, objectId: action.payload}
+            return { ...state, fetching: false, objectId: action.payload }
         case CLEAN_STATE:
-            return {...state, object: Object.assign(state.object, initialData.object)}
+            return {
+                ...state,
+                objectChar: Object.assign(
+                    {},
+                    delete state.objectChar.character,
+                    state.objectChar
+                ),
+            }
+        case GET_DISPLAY_CHAR:
+            return {
+                ...state, displayChar: action.payload, fetching: false
+            }
         default:
             return state
     }
@@ -50,68 +64,26 @@ export default function reducer(state = initialData, action) {
 /* actions */
 
 // get data action
-export let getModalDataAction = () => (dispatch, getState) => {
+export let getCharAction = () => (dispatch, getState) => {
     let ID = getState().modal.objectId
-
-    // set query depending on filter selected
-    // let selectQuery = () => {
-    //     switch (filter) {
-    //         case "characters":
-    //             return gql`
-    //                 query getCharacterById($ID: ID!) {
-    //                     character(id: $ID) {
-    //                         name
-    //                         type
-    //                         gender
-    //                         species
-    //                         image
-    //                     }
-    //                 }
-    //             `
-    //         case "locations":
-    //             return gql`
-    //                 query getLocationById($ID: ID!) {
-    //                     location(id: $ID) {
-    //                         name
-    //                         type
-    //                         dimension
-    //                         residents {
-    //                             name
-    //                         }
-    //                     }
-    //                 }
-    //             `
-    //         case "episodes":
-    //             return gql`
-    //                 query getEpisodeById($ID: ID!) {
-    //                     episode(id: $ID) {
-    //                         name
-    //                         air_date
-    //                         episode
-    //                         characters {
-    //                             name
-    //                         }
-    //                     }
-    //                 }
-    //             `
-    //     }
-    // }
+    let filter = getState().modal.filter
 
     let query = gql`
         query($entityID: ID!) {
             character(id: $entityID) {
+                id
                 name
                 type
                 gender
-                species 
-                image   
-                status    
-               
+                species
+                image
+                status
             }
         }
     `
+
     dispatch({
-        type: MODAL_DATA,
+        type: CHAR,
     })
 
     return client
@@ -121,29 +93,36 @@ export let getModalDataAction = () => (dispatch, getState) => {
         })
         .then(({ data }) => {
             dispatch({
-                type: MODAL_DATA_SUCCESS,
+                type: CHAR_SUCCESS,
                 payload: data,
             })
         })
         .catch(err => {
             dispatch({
-                type: MODAL_DATA_ERROR,
+                type: CHAR_ERROR,
                 payload: err,
             })
         })
 }
 
-export let setObjectIdAction = elem => (dispatch) => {
-
+export let setObjectIdAction = elem => dispatch => {
     dispatch({
         type: GET_ID,
-        payload: elem
+        payload: elem,
     })
-
 }
 
-export let cleanStateAction = () => dispatch => {
+export let cleanStateAction = id => dispatch => {
     dispatch({
-        type: CLEAN_STATE
+        type: CLEAN_STATE,
+        payload: id,
+    })
+}
+
+export let setDisplayCharAction = elem => (dispatch) => {
+
+    dispatch({
+        type: GET_DISPLAY_CHAR,
+        payload: elem
     })
 }

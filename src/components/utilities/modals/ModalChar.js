@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react"
-
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
+import React, { useEffect } from "react"
 
 import Fade from "react-reveal/Fade"
-import { cleanStateAction } from "../../../redux/modalDucks"
+import { cleanStateAction, setDisplayCharAction } from "../../../redux/modalDucks"
 
 import { connect } from "react-redux"
 
-function ModalChar({ modal, show, onHide, char, cleanStateAction }) {
+function ModalChar({ modal, show, onHide, char, cleanStateAction, id, setDisplayCharAction }) {
     let overlay = document.querySelector(".overlay")
-    let modalBox = document.querySelector(".modal")
     useEffect(() => {
         if (show) {
             overlay.classList.remove("d-none")
@@ -20,7 +15,8 @@ function ModalChar({ modal, show, onHide, char, cleanStateAction }) {
 
     let handleClickOverlay = () => {
         overlay.classList.toggle("d-none")
-        cleanStateAction()
+        setDisplayCharAction(false)
+        cleanStateAction(id)
         // when overlay is clicked, the modal closes
         onHide()
     }
@@ -29,40 +25,52 @@ function ModalChar({ modal, show, onHide, char, cleanStateAction }) {
         <div className='overlay d-none' onClick={handleClickOverlay}>
             <div className='modal-position'>
                 <div className='modal'>
-                    <Fade>
+                    {char !== undefined && modal.displayChar ? <Fade>
                         <div className='modal__header'>
                             <h2>{char.name}</h2>
                         </div>
                         <div className='modal__body'>
-                            <div className='modal__body--image'>
-                                <img src={char.image} alt='charImg' />
-                            </div>
+                            <Fade>
+                                <div className='modal__body--image'>
+                                    <img src={char.image} alt='charImg' />
+                                </div>
 
-                            <div class='modal__body--info'>
-                                <Container className='mx-auto'>
-                                    <Row>
-                                        <Col lg='4'>
-                                            <p>
-                                                <span className='info-name'>Type:</span>{" "}
-                                                {char.type !== "" ? char.type : "none"}
-                                            </p>
-                                            <p>
-                                                <span className='info-name'>Gender:</span> {char.gender}
-                                            </p>
-                                        </Col>
-                                        <Col lg='4'>
-                                            <p>
-                                                <span className='info-name'>Species:</span> {char.species}
-                                            </p>
-                                            <p>
-                                                <span className='info-name'>Status:</span> {char.status}
-                                            </p>
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            </div>
+                                <div className='modal__body--info'>
+                                    <div className='info1'>
+                                        <p>
+                                            <span className='info-name'>
+                                                Type:
+                                            </span>{" "}
+                                            {char.type !== ""
+                                                ? char.type
+                                                : "none"}
+                                        </p>
+                                        <p>
+                                            <span className='info-name'>
+                                                Gender:
+                                            </span>{" "}
+                                            {char.gender}
+                                        </p>
+                                    </div>
+
+                                    <div className='info-col2'>
+                                        <p>
+                                            <span className='info-name'>
+                                                Species:
+                                            </span>{" "}
+                                            {char.species}
+                                        </p>
+                                        <p>
+                                            <span className='info-name'>
+                                                Status:
+                                            </span>{" "}
+                                            {char.status}
+                                        </p>
+                                    </div>
+                                </div>
+                            </Fade>
                         </div>
-                    </Fade>
+                    </Fade> : null}
                 </div>
             </div>
         </div>
@@ -75,4 +83,4 @@ function mapState(state) {
     }
 }
 
-export default connect(mapState, { cleanStateAction })(ModalChar)
+export default connect(mapState, { cleanStateAction, setDisplayCharAction })(ModalChar)
