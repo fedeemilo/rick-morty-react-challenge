@@ -229,6 +229,10 @@
 }
 
 @media (max-width: 576px) {
+  .filter {
+    -webkit-transform: scale(1.3);
+            transform: scale(1.3);
+  }
   .filter label {
     font-size: 1rem;
   }
@@ -452,9 +456,10 @@
 
 .overlay .modal-position .modal ion-icon {
   position: absolute;
-  left: 91%;
+  left: 93%;
   top: 0.9%;
   font-size: 2rem;
+  --ionicon-stroke-width: 80px;
 }
 
 .overlayEpiLoc {
@@ -543,10 +548,10 @@
 
 .overlayEpiLoc .modal-position .modalEpiLoc ion-icon {
   position: absolute;
-  left: 88%;
+  left: 95%;
   top: 0.9%;
   font-size: 2rem;
-  --ionicon-stroke-width: 16px;
+  --ionicon-stroke-width: 80px;
 }
 
 @media (max-width: 989px) {
@@ -574,6 +579,9 @@
 @media (max-width: 576px) {
   .overlay .modal-position {
     width: 95vw;
+  }
+  .overlay .modal-position .modal ion-icon {
+    left: 90%;
   }
   .overlayEpiLoc .modal-position {
     width: 100vw !important;

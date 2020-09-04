@@ -39,7 +39,7 @@ function ModalChar({
                 <div className="modal">
                     {char !== undefined && modal.displayChar ? (
                         <Fade>
-                            <ion-icon name="close"></ion-icon>
+                            <ion-icon name="close-outline"></ion-icon>
                             <div className="modal__header">
                                 <h2>{char.name}</h2>
                             </div>
