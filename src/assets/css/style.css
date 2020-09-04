@@ -342,8 +342,16 @@
     -webkit-transform: translateY(-160%);
             transform: translateY(-160%);
   }
+  .searcher__title {
+    margin-bottom: 1.7rem;
+  }
   .searcher__input {
     width: 70% !important;
+  }
+  .searcher__name, .searcher__type {
+    -webkit-transform: translateX(63%);
+            transform: translateX(63%);
+    margin-bottom: -2.5rem;
   }
 }
 

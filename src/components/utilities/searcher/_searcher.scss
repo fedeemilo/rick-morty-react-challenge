@@ -56,7 +56,7 @@
 /* large */
 @media (max-width: $largeBreakpoint) {
     .searcher {
-		max-width: 100% !important;
+        max-width: 100% !important;
         // margin-top: -45%;
         &__input {
             width: 80% !important;
@@ -67,47 +67,52 @@
 /* medium */
 @media (max-width: $mediumBreakpoint) {
     .searcher {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		transform: translateY(-200%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-200%);
 
+        &__title {
+            font-size: 2rem;
+        }
 
-		&__title {
-			font-size: 2rem;
-		}
+        &__input {
+            margin: 0 auto;
+        }
 
-		&__input {
-			margin: 0 auto;
-		}
-
-		&__name, &__type {
-			display: flex;
-			justify-content: center;
-		}
-
-
+        &__name,
+        &__type {
+            display: flex;
+            justify-content: center;
+        }
     }
 }
 
 /* small */
 @media (max-width: $smallBreakpoint) {
-
-	.searcher {
-		transform: translateY(-160%);
-	}
+    .searcher {
+        transform: translateY(-160%);
+    }
 }
 
 /* xs */
 @media (max-width: $xsBreakpoint) {
+    .searcher {
+        transform: translateY(-160%);
 
-	.searcher {
-		transform: translateY(-160%);
+        &__title {
+            margin-bottom: 1.7rem;
+        }
 
+        &__input {
+            width: 70% !important;
+        }
 
-		&__input {
-			width: 70% !important;
-		}
-	}
+        &__name,
+        &__type {
+            transform: translateX(63%);
+            margin-bottom: -2.5rem;
+        }
+    }
 }
