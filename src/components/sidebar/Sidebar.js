@@ -7,6 +7,7 @@ import Filter from "../utilities/filter/Filter"
 function Sidebar() {
     return (
         <div className='sidebar'>
+            <h3 className='text-center'>Rick & Morty App</h3>
             <div className='sidebar__filters'>
                 <h4>Filters</h4>
                 <Container>
