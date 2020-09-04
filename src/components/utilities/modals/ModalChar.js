@@ -1,13 +1,13 @@
 import React, { useEffect } from "react"
-
+import PropTypes from "prop-types"
 import Fade from "react-reveal/Fade"
+import Spinner from "react-bootstrap/Spinner"
+import { connect } from "react-redux"
 import {
     cleanCharAction,
     setDisplayCharAction,
 } from "../../../redux/modalDucks"
 
-import Spinner from "react-bootstrap/Spinner"
-import { connect } from "react-redux"
 
 function ModalChar({
     modal,
@@ -23,7 +23,7 @@ function ModalChar({
         if (show) {
             overlay.classList.remove("d-none")
         }
-    }, [modal, show])
+    }, [modal, show, overlay])
 
     let handleClickOverlay = () => {
         overlay.classList.toggle("d-none")
@@ -39,6 +39,7 @@ function ModalChar({
                 <div className="modal">
                     {char !== undefined && modal.displayChar ? (
                         <Fade>
+                            <ion-icon name="close"></ion-icon>
                             <div className="modal__header">
                                 <h2>{char.name}</h2>
                             </div>
@@ -103,6 +104,18 @@ function mapState(state) {
     }
 }
 
+ModalChar.propTypes = {
+    id: PropTypes.string,
+    modal: PropTypes.object,
+    show: PropTypes.bool,
+    onHide: PropTypes.bool,
+    char: PropTypes.object,
+    cleanCharAction: PropTypes.func,
+    setDisplayCharAction: PropTypes.func
+}
+
 export default connect(mapState, { cleanCharAction, setDisplayCharAction })(
     ModalChar
 )
+
+

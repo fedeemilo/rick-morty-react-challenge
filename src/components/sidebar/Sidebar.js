@@ -11,7 +11,7 @@ function Sidebar() {
                 <h4>Filters</h4>
                 <Container>
                     <Row>
-                        <Col>
+                        <Col className='special-col'>
                             <Filter filterName='Characters' nameAttr='filter' />
                             <Filter filterName='Locations' nameAttr='filter' />
                             <Filter filterName='Episodes' nameAttr='filter' />

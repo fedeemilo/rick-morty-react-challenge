@@ -14,3 +14,44 @@
 
 
 }
+
+@media (max-width: $mediumBreakpoint) {
+
+    .sidebar {
+
+
+        &__filters {
+
+
+            h4 {
+                text-align: center;
+                font-size: 2.5rem;
+            
+            }
+
+            .special-col {
+                display: flex;
+                justify-content: space-around;
+                
+            }
+                    
+        }
+    }
+}
+
+@media (max-width: $smallBreakpoint) {
+
+    .sidebar {
+
+
+        &__filters {
+            .special-col {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+    }
+
+}

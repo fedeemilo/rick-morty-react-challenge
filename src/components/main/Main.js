@@ -39,7 +39,6 @@ function Main({
     setDisplayLocationAction,
     setDisplayEpisodeAction,
     itemPageAction,
-    cleanStateAction,
 }) {
     let [modalShow, setModalShow] = useState(false)
     let [modalEpiLocShow, setModalEpiLocShow] = useState(false)
@@ -98,11 +97,11 @@ function Main({
             <Container className="main__container">
                 {/* searcher */}
                 <Searcher />
-                <Row>
+                <Row className='row-cards'>
                     {/* grid of cards */}
                     {display && !reset && obj !== undefined ? (
                         obj.results.map(char => (
-                            <Col lg={3} key={char.id}>
+                            <Col key={char.id}>
                                 <Fade effect="fadeInUp">
                                     <Card
                                         id={char.id}
@@ -188,7 +187,19 @@ Main.propTypes = {
     display: PropTypes.bool,
     filter: PropTypes.string,
     reset: PropTypes.bool,
+    setObjectIdAction: PropTypes.func,
+    getCharAction: PropTypes.func,
+    getLocationAction: PropTypes.func,
+    getEpisodeAction: PropTypes.func,
+    setDisplayCharAction: PropTypes.func,
+    setDisplayLocationAction: PropTypes.func,
+    setDisplayEpisodeAction: PropTypes.func,
+    itemPageAction: PropTypes.func,
+    character: PropTypes.object,
+    episode: PropTypes.object,
+    location: PropTypes.object,
 }
+
 
 export default connect(mapState, {
     setObjectIdAction,

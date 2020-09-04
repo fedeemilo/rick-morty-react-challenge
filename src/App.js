@@ -12,14 +12,14 @@ function App() {
             <Container fluid>
                 <Row>
                     {/* Sidebar */}
-                    <Col sm={2}>
+                    <Col lg={2} md={12}>
                         <Sidebar />
                     </Col>
-                    <Col sm={1}>
+                    <Col lg={1}>
                         <div className='vl'></div>
                     </Col>
                     {/* Main */}
-                    <Col sm={8}>
+                    <Col lg={8} md={12}>
                         <Main />
                     </Col>
                 </Row>

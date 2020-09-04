@@ -14,7 +14,7 @@ import {
     getDataAction,
     setDisplayAction,
     setResetAction,
-    cleanStateAction
+    cleanStateAction,
 } from "../../../redux/searcherDucks"
 
 function Searcher({
@@ -28,6 +28,8 @@ function Searcher({
 }) {
     let [disable, setDisable] = useState(false)
     let [btnDisable, setBtnDisable] = useState(true)
+
+    let winWidth = window.innerWidth
 
     useEffect(() => {
         // if the filter selected is episodes, it disable's type attr
@@ -62,7 +64,7 @@ function Searcher({
     let handleRadio = e => {
         setAttributeAction(e.target.id.toLowerCase())
     }
-    
+
     // handle reset button to restart the search process
     let handleResetButton = e => {
         let searcher = document.querySelector(".searcher__input")
@@ -79,41 +81,41 @@ function Searcher({
         (lowerRest ? rest.join("").toLowerCase() : rest.join(""))
 
     return (
-        <div className='searcher '>
-            <h4 className='searcher__title'>{capitalize(filter, true)}</h4>
+        <div className="searcher ">
+            <h4 className="searcher__title">{capitalize(filter, true)}</h4>
             <Container>
                 <Row>
                     {/* searcher input */}
                     <input
-                        className='searcher__input'
-                        type='text'
+                        className="searcher__input"
+                        type="text"
                         onChange={handleInput}
-                        placeholder='Enter your search...'
+                        placeholder="Enter your search..."
                     />
                     <Button
-                        variant='outline-primary'
-                        className='ml-2 search__button'
+                        variant="outline-primary"
+                        className="ml-2 search__button"
                         onClick={handleResetButton}
                         disabled={btnDisable}>
                         Reset
                     </Button>{" "}
                     {/* searcher radio buttons (name or type) */}
-                    <Col lg='2'>
+                    <Col lg="2" md="6" sm="4" xs="5">
                         {/* name */}
-                        <div className='mt-3 searcher__name'>
+                        <div className="mt-3 searcher__name">
                             <Filter
-                                filterName='Name'
-                                nameAttr='attribute'
+                                filterName="Name"
+                                nameAttr="attribute"
                                 handleRadio={handleRadio}
                             />
                         </div>
                     </Col>
-                    <Col lg='2'>
+                    <Col lg="2" md="6" sm="4" xs="5">
                         {/* type */}
-                        <div className='mt-3 searcher__type'>
+                        <div className="mt-3 searcher__type">
                             <Filter
-                                filterName='Type'
-                                nameAttr='attribute'
+                                filterName="Type"
+                                nameAttr="attribute"
                                 handleRadio={handleRadio}
                                 isDisabled={disable}
                             />
@@ -136,6 +138,8 @@ Searcher.propTypes = {
     setAttributeAction: PropTypes.func,
     getDataAction: PropTypes.func,
     setDisplayAction: PropTypes.func,
+    setResetAction: PropTypes.func,
+    cleanStateAction: PropTypes.func,
     filter: PropTypes.string,
 }
 
@@ -145,6 +149,5 @@ export default connect(mapState, {
     getDataAction,
     setDisplayAction,
     setResetAction,
-    cleanStateAction
-    
+    cleanStateAction,
 })(Searcher)

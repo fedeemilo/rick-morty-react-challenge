@@ -32,9 +32,7 @@ let GET_FILTER = "GET_FILTER"
 let GET_DISPLAY = "GET_DISPLAY"
 let GET_RESET = "GET_RESET"
 
-// update the page
-let UPDATE_PAGE = "UPDATE_PAGE"
-
+// obtain new page 
 let NEW_PAGE = "ITEM_PAGE"
 
 // clean store

@@ -23,7 +23,6 @@
 
 body {
     background: $secondary;
-    overflow-x: hidden;
 }
 
 // vertical line
@@ -33,4 +32,11 @@ body {
     left: 20%;
     height: 100%;
     z-index: -1;
+}
+
+@media (max-width: $largeBreakpoint) {
+
+    .vl {
+        display: none;
+    }
 }

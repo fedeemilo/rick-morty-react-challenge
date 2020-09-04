@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-
+import PropTypes from "prop-types"
 import Fade from "react-reveal/Fade"
 import {
     cleanEpisodeAction,
@@ -8,9 +8,6 @@ import {
     setDisplayLocationAction,
 } from "../../../redux/modalDucks"
 import Spinner from "react-bootstrap/Spinner"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
 import Card from "../card/Card"
 import { connect } from "react-redux"
 import NoImage from "../../../assets/img/no-image.png"
@@ -32,7 +29,7 @@ function ModalEpiLoc({
         if (showEpiLoc) {
             overlay.classList.remove("d-none")
         }
-    }, [modal, showEpiLoc])
+    }, [modal, showEpiLoc, overlay])
 
     let handleClickOverlay = () => {
         // display overlay
@@ -42,9 +39,13 @@ function ModalEpiLoc({
             case "locations":
                 setDisplayLocationAction(false)
                 cleanLocationAction(idEpiLoc)
+                break
             case "episodes":
                 setDisplayEpisodeAction(false)
                 cleanEpisodeAction(idEpiLoc)
+                break
+            default:
+                return
         }
 
         // when overlay is clicked, the modal closes
@@ -61,6 +62,7 @@ function ModalEpiLoc({
                     {(epi !== undefined && modal.displayEpisode) ||
                     (loc !== undefined && modal.displayLocation) ? (
                         <Fade>
+                            <ion-icon name="close"></ion-icon>
                             <div className="modalEpiLoc__header">
                                 <h2>
                                     {filter === "episodes"
@@ -136,6 +138,18 @@ function mapState(state) {
     return {
         modal: state.modal,
     }
+}
+
+ModalEpiLoc.propTypes = {
+    idEpiLoc: PropTypes.string,
+    modal: PropTypes.object,
+    onHideEpiLoc: PropTypes.bool,
+    epi: PropTypes.object,
+    loc: PropTypes.object,
+    setDisplayEpisodeAction: PropTypes.func,
+    cleanEpisodeAction: PropTypes.func,
+    cleanLocationAction: PropTypes.func,
+    filter: PropTypes.string
 }
 
 export default connect(mapState, {

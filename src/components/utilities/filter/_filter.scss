@@ -32,3 +32,14 @@
         }
     }
 }
+
+
+@media (max-width: $smallBreakpoint) {
+
+    .filter {
+
+        label {
+            font-size: 1rem;
+        }
+    }
+}

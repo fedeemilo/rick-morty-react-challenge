@@ -44,6 +44,7 @@ function Card({ name, image, dimension, episode, handleClickCard, id }) {
 }
 
 Card.propTypes = {
+    id: PropTypes.string,
     name: PropTypes.string.isRequired,
     image: PropTypes.string,
     dimension: PropTypes.string,

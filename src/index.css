@@ -9,6 +9,9 @@ html, body {
   font-family: 'Poppins', sans-serif !important;
 }
 
+body {
+  overflow-x: hidden !important;
+}
 
 
 code {
