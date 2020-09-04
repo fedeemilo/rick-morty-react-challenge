@@ -20,12 +20,12 @@ function Card({ name, image, dimension, episode, handleClickCard, id }) {
         <div id={id} className='card' onClick={handleClickCard} >
             {/* card header */}
             <div className='card__header'>
-                {/* nombre */}
+                {/* name */}
                 <h4 className='text-primary'>{name}</h4>
             </div>
             {/* card body */}
             <div className='card__body'>
-                {/* imagen */}
+                {/* image */}
                 {image !== undefined ? <img src={image} alt={name} /> : null}
 
                 {/* dimension */}
