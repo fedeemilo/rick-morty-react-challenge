@@ -8,8 +8,9 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
     cursor: pointer;
+    z-index: 999999;
+
 
     .modal-position {
         @include box(38rem, 29.6rem, 10px, 2rem);
@@ -19,11 +20,11 @@
         left: 50%;
         font-size: 50px;
         transform: translate(-50%, -50%);
+        
 
         .modal {
             display: flex;
             flex-direction: column;
-
             height: 100%;
             width: 100%;
 
@@ -88,6 +89,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
     cursor: pointer;
+    z-index: 999999;
 
     // position modal on center
     .modal-position {
@@ -100,8 +102,10 @@
         font-size: 50px;
         transform: translate(-50%, -50%);
 
+
         // modal episode/location
         .modalEpiLoc {
+            
             // header modal
             &__header {
                 h2 {

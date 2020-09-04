@@ -13,6 +13,7 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Card from "../card/Card"
 import { connect } from "react-redux"
+import NoImage from "../../../assets/img/no-image.png"
 
 function ModalEpiLoc({
     modal,
@@ -94,14 +95,27 @@ function ModalEpiLoc({
                                 </div>
                                 <div className="modalEpiLoc__body--chars">
                                     {/* render the first five characters of the episode */}
-                                    {filter === 'episodes' ? epi.characters.slice(0, 5).map(char => (
-                                        <Card
-                                            name={char.name}
-                                            image={char.image}
-                                        />
-                                    )) : loc.residents.slice(0,5).map(resident => (
-                                        <Card name={resident.name} image={resident.image} />
-                                    ))}
+                                    {filter === "episodes"
+                                        ? epi.characters
+                                              .slice(0, 5)
+                                              .map(char => (
+                                                  <Card
+                                                      name={char.name}
+                                                      image={char.image}
+                                                  />
+                                              ))
+                                        : loc.residents
+                                              .slice(0, 5)
+                                              .map(resident => (
+                                                  <Card
+                                                      name={resident.name}
+                                                      image={
+                                                          resident.image
+                                                              ? resident.image
+                                                              : NoImage
+                                                      }
+                                                  />
+                                              ))}
                                 </div>
                             </div>
                         </Fade>

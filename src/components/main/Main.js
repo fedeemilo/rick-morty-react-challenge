@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -39,9 +39,8 @@ function Main({
     setDisplayLocationAction,
     setDisplayEpisodeAction,
     itemPageAction,
-    cleanStateAction
+    cleanStateAction,
 }) {
-
     let [modalShow, setModalShow] = useState(false)
     let [modalEpiLocShow, setModalEpiLocShow] = useState(false)
     let [currentId, setCurrentId] = useState("")
@@ -71,10 +70,9 @@ function Main({
                 setDisplayEpisodeAction(true)
                 break
             default:
-                return 'Data not found'
+                return "Data not found"
         }
     }
-
 
     // go to previous page
     let handlePagePrev = () => {
@@ -95,7 +93,6 @@ function Main({
         itemPageAction(actualPage + 1)
     }
 
-
     return (
         <div className="main">
             <Container className="main__container">
@@ -106,7 +103,7 @@ function Main({
                     {display && !reset && obj !== undefined ? (
                         obj.results.map(char => (
                             <Col lg={3} key={char.id}>
-                                <Fade>
+                                <Fade effect="fadeInUp">
                                     <Card
                                         id={char.id}
                                         name={char.name}
@@ -143,11 +140,14 @@ function Main({
                         </Zoom>
                     )}
                 </Row>
-                {display && !reset ? (
+                {display && !reset && obj !== undefined ? (
                     <Container className="mt-4 d-flex justify-content-center">
                         <Row>
                             <Pagination size="lg">
-                                <Pagination.Prev onClick={handlePagePrev} disabled={actualPage === 1} />
+                                <Pagination.Prev
+                                    onClick={handlePagePrev}
+                                    disabled={actualPage === 1}
+                                />
                                 {/* for each page add a pagination item */}
                                 {[...Array(obj.info.pages)].map((page, idx) => (
                                     <Pagination.Item
@@ -158,7 +158,10 @@ function Main({
                                     </Pagination.Item>
                                 ))}
 
-                                <Pagination.Next onClick={handlePageNext} disabled={actualPage === obj.info.pages} />
+                                <Pagination.Next
+                                    onClick={handlePageNext}
+                                    disabled={actualPage === obj.info.pages}
+                                />
                             </Pagination>
                         </Row>
                     </Container>
@@ -196,5 +199,5 @@ export default connect(mapState, {
     getLocationAction,
     getEpisodeAction,
     itemPageAction,
-    cleanStateAction
+    cleanStateAction,
 })(Main)
