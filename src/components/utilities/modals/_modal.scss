@@ -219,11 +219,16 @@
 
     .overlayEpiLoc {
         .modal-position {
-            width: 100vw !important;
-            height: 96vh !important;
+            width: 93vw !important;
+            height: 98vh !important;
             overflow: auto;
 
             .modalEpiLoc {
+
+                ion-icon {
+                    left: 90%;
+                }
+
                 &__body {
                     &--chars {
                         flex-direction: column;

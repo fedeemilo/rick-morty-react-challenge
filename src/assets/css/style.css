@@ -606,9 +606,12 @@
     left: 90%;
   }
   .overlayEpiLoc .modal-position {
-    width: 100vw !important;
-    height: 96vh !important;
+    width: 93vw !important;
+    height: 98vh !important;
     overflow: auto;
+  }
+  .overlayEpiLoc .modal-position .modalEpiLoc ion-icon {
+    left: 90%;
   }
   .overlayEpiLoc .modal-position .modalEpiLoc__body--chars {
     -webkit-box-orient: vertical;
