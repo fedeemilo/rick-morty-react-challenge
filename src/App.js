@@ -6,6 +6,7 @@ import Main from "./components/main/Main"
 import Sidebar from "./components/sidebar/Sidebar"
 import Footer from "./components/footer/Footer"
 
+
 function App() {
     return (
         <div>

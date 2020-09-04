@@ -42,6 +42,12 @@ function Searcher({
 
     // listen to user's input
     let handleInput = e => {
+
+        if (winWidth < 500) {
+            
+        }
+
+
         let input = e.target.value
         // set the search attribute from store
         setSearchAction(input)

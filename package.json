@@ -27,6 +27,7 @@
 		"react-reveal": "^1.2.2",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "3.4.3",
+		"react-scroll-up-button": "^1.6.4",
 		"redux": "^4.0.5",
 		"redux-devtools": "^3.6.1",
 		"redux-thunk": "^2.3.0"

@@ -181,10 +181,17 @@
 
 @media (max-width: 449px) {
   .card {
-    max-width: 100% !important;
+    max-width: 100%;
     width: 16rem;
-    height: 19rem;
-    margin: 2rem auto !important;
+    height: 100% !important;
+    margin: 2rem auto;
+  }
+  .card__header h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  .card__body p {
+    font-size: 1.3rem;
   }
 }
 
@@ -446,7 +453,7 @@
 .overlay .modal-position .modal ion-icon {
   position: absolute;
   left: 91%;
-  top: .9%;
+  top: 0.9%;
   font-size: 2rem;
 }
 
@@ -536,9 +543,10 @@
 
 .overlayEpiLoc .modal-position .modalEpiLoc ion-icon {
   position: absolute;
-  left: 91%;
-  top: .9%;
+  left: 88%;
+  top: 0.9%;
   font-size: 2rem;
+  --ionicon-stroke-width: 16px;
 }
 
 @media (max-width: 989px) {
@@ -565,12 +573,11 @@
 
 @media (max-width: 576px) {
   .overlay .modal-position {
-    overflow: hidden !important;
     width: 95vw;
   }
   .overlayEpiLoc .modal-position {
     width: 100vw !important;
-    height: 100vh !important;
+    height: 96vh !important;
     overflow: auto;
   }
   .overlayEpiLoc .modal-position .modalEpiLoc__body--chars {
@@ -586,7 +593,7 @@
   }
   .overlayEpiLoc .modal-position .modalEpiLoc__body--chars .card__header h4 {
     font-size: 1.5rem !important;
-    padding: .4rem;
+    padding: 0.4rem;
     font-weight: 700;
   }
 }
@@ -631,6 +638,9 @@
 
 body {
   background: #b5f4fb;
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 
 .vl {

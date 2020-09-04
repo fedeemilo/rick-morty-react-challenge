@@ -11,6 +11,8 @@ import generateStore from './redux/store'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 
+import ScrollUpButton from "react-scroll-up-button";
+
 let store = generateStore()
 
 let url = 'https://rickandmortyapi.com/graphql/'
@@ -21,6 +23,7 @@ let client = new ApolloClient({
 
 let WithStore = () => (
   <Provider store={store}>
+    <ScrollUpButton style={{marginBottom: '3rem'}} />
     <App />
   </Provider>
 )

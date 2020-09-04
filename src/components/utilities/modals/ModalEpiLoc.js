@@ -62,7 +62,7 @@ function ModalEpiLoc({
                     {(epi !== undefined && modal.displayEpisode) ||
                     (loc !== undefined && modal.displayLocation) ? (
                         <Fade>
-                            <ion-icon name="close"></ion-icon>
+                            <ion-icon name="close-outline"></ion-icon>
                             <div className="modalEpiLoc__header">
                                 <h2>
                                     {filter === "episodes"
