@@ -100,16 +100,18 @@ function ModalEpiLoc({
                                     {filter === "episodes"
                                         ? epi.characters
                                               .slice(0, 5)
-                                              .map(char => (
+                                              .map((char, idx) => (
                                                   <Card
+                                                      key={idx}
                                                       name={char.name}
                                                       image={char.image}
                                                   />
                                               ))
                                         : loc.residents
                                               .slice(0, 5)
-                                              .map(resident => (
+                                              .map((resident, idx) => (
                                                   <Card
+                                                      key={idx}
                                                       name={resident.name}
                                                       image={
                                                           resident.image
@@ -149,7 +151,7 @@ ModalEpiLoc.propTypes = {
     setDisplayEpisodeAction: PropTypes.func,
     cleanEpisodeAction: PropTypes.func,
     cleanLocationAction: PropTypes.func,
-    filter: PropTypes.string
+    filter: PropTypes.string,
 }
 
 export default connect(mapState, {
