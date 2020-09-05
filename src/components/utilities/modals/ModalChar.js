@@ -108,7 +108,7 @@ ModalChar.propTypes = {
     id: PropTypes.string,
     modal: PropTypes.object,
     show: PropTypes.bool,
-    onHide: PropTypes.bool,
+    onHide: PropTypes.func,
     char: PropTypes.object,
     cleanCharAction: PropTypes.func,
     setDisplayCharAction: PropTypes.func

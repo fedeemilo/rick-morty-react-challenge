@@ -143,7 +143,7 @@ function mapState(state) {
 ModalEpiLoc.propTypes = {
     idEpiLoc: PropTypes.string,
     modal: PropTypes.object,
-    onHideEpiLoc: PropTypes.bool,
+    onHideEpiLoc: PropTypes.func,
     epi: PropTypes.object,
     loc: PropTypes.object,
     setDisplayEpisodeAction: PropTypes.func,
