@@ -18,6 +18,8 @@ https://rickmorty-react.vercel.app/
 
 - Sass
 
+- PropTypes
+
 ### Starting the application
 
 - git clone https://github.com/fedeemilo/rick-morty-react-challenge.git -> clone repository
