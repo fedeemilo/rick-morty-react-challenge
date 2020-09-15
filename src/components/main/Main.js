@@ -1,14 +1,12 @@
 import React, { useState } from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Pagination from "react-bootstrap/Pagination"
-import Searcher from "../utilities/searcher/Searcher"
-import Card from "../utilities/card/Card"
+
+import { Container, Row, Col, Pagination } from 'react-bootstrap'
+import {Zoom, Fade} from 'react-reveal'
+import { Searcher, Card } from '../'
+
 import ModalChar from "../utilities/modals/ModalChar"
 import ModalEpiLoc from "../utilities/modals/ModalEpiLoc"
-import Zoom from "react-reveal/Zoom"
-import Fade from "react-reveal/Fade"
+
 import {
     setObjectIdAction,
     getCharAction,

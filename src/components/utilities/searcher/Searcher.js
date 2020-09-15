@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
-import Filter from "../filter/Filter"
+import { Container, Row, Col, Button } from "react-bootstrap"
+
+import { Filter } from "../../"
 import PropTypes from "prop-types"
 
 import { connect } from "react-redux"
@@ -42,11 +40,6 @@ function Searcher({
 
     // listen to user's input
     let handleInput = e => {
-
-        if (winWidth < 500) {
-            
-        }
-
 
         let input = e.target.value
         // set the search attribute from store
