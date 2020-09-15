@@ -61,7 +61,7 @@ function Modal({
     let ModalEntity = () => {
         if (!!char && modal.displayChar) {
             return (
-                <div>
+                <div className="modal">
                     <ion-icon name="close-outline"></ion-icon>
                     <div className="modal__header">
                         <h2>{char.name}</h2>
@@ -185,11 +185,11 @@ function Modal({
     }
 
     return (
-        <div className="overlay overlayEpiLoc d-none" onClick={handleClickOverlay}>
+        <div
+            className="overlay overlayEpiLoc d-none"
+            onClick={handleClickOverlay}>
             <div className="modal-position">
-                <div className="modal">
-                    <ModalEntity />
-                </div>
+                <ModalEntity />
             </div>
         </div>
     )
