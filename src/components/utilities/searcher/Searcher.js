@@ -67,13 +67,9 @@ function Searcher({
         searcher.value = ""
     }
 
-    let capitalize = ([first, ...rest], lowerRest = false) =>
-        first.toUpperCase() +
-        (lowerRest ? rest.join("").toLowerCase() : rest.join(""))
-
     return (
         <div className="searcher ">
-            <h4 className="searcher__title">{capitalize(filter, true)}</h4>
+            <h4 className="searcher__title text-capitalize">{filter}</h4>
             <Container>
                 <Row>
                     {/* searcher input */}
@@ -82,6 +78,7 @@ function Searcher({
                         type="text"
                         onChange={handleInput}
                         placeholder="Enter your search..."
+                        autoCapitalize
                     />
                     <Button
                         variant="outline-primary"
