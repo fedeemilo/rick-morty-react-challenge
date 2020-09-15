@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 
-import { Container, Row, Col, Pagination } from 'react-bootstrap'
-import {Zoom, Fade} from 'react-reveal'
-import { Searcher, Card } from '../'
+import { Container, Row, Col, Pagination } from "react-bootstrap"
+import { Zoom, Fade } from "react-reveal"
+import { Searcher, Card } from "../"
 
 import ModalChar from "../utilities/modals/ModalChar"
 import ModalEpiLoc from "../utilities/modals/ModalEpiLoc"
@@ -88,75 +88,90 @@ function Main({
         itemPageAction(actualPage + 1)
     }
 
-    return (
-        <div className="main">
-            <Container className="main__container">
-                <Searcher />
-                <Row className='row-cards'>
-                    {/* grid of cards */}
-                    {displayCards && !resetSearch && searchObject !== undefined ? (
-                        searchObject.results.map(char => (
-                            <Col key={char.id}>
-                                <Fade effect="fadeInUp">
-                                    <Card
-                                        id={char.id}
-                                        name={char.name}
-                                        image={char.image}
-                                        dimension={char.dimension}
-                                        episode={char.episode}
-                                        handleClickCard={handleClickCard}
-                                    />
-                                </Fade>
-                                <ModalChar
-                                    id={currentId}
-                                    char={character}
-                                    show={modalShow}
-                                    onHide={() => setModalShow(false)}
-                                />
-                                <ModalEpiLoc
-                                    idEpiLoc={currentId}
-                                    epi={episode}
-                                    loc={location}
-                                    filter={filter}
-                                    showEpiLoc={modalEpiLocShow}
-                                    onHideEpiLoc={() =>
-                                        setModalEpiLocShow(false)
-                                    }
-                                />
-                            </Col>
-                        ))
-                    ) : (
-                        <Zoom>
-                            <img src={Rick} alt="rick" className="rick-pic" />
-                        </Zoom>
-                    )}
-                </Row>
-                {displayCards && !resetSearch && searchObject !== undefined ? (
-                    <Container className="mt-4 d-flex justify-content-center">
-                        <Row>
-                            <Pagination size="lg">
-                                <Pagination.Prev
-                                    onClick={handlePagePrev}
-                                    disabled={actualPage === 1}
-                                />
-                                {/* for each page add a pagination item */}
-                                {[...Array(searchObject.info.pages)].map((page, idx) => (
+    // conditional component grid of cards
+    let GridOfCards = () => {
+        if (displayCards && !resetSearch && searchObject !== undefined) {
+            return searchObject.results.map(char => (
+                <Col key={char.id}>
+                    <Fade effect="fadeInUp">
+                        <Card
+                            id={char.id}
+                            name={char.name}
+                            image={char.image}
+                            dimension={char.dimension}
+                            episode={char.episode}
+                            handleClickCard={handleClickCard}
+                        />
+                    </Fade>
+                </Col>
+            ))
+        }
+        return (
+            <Zoom>
+                <img src={Rick} alt="rick" className="rick-pic" />
+            </Zoom>
+        )
+    }
+
+    // conditional component data pagination
+    let DataPagination = () => {
+        if (displayCards && !resetSearch && searchObject !== undefined) {
+            return (
+                <Container className="mt-4 d-flex justify-content-center">
+                    <Row>
+                        <Pagination size="lg">
+                            <Pagination.Prev
+                                onClick={handlePagePrev}
+                                disabled={actualPage === 1}
+                            />
+                            {/* for each page add a pagination item */}
+                            {[...Array(searchObject.info.pages)].map(
+                                (page, idx) => (
                                     <Pagination.Item
                                         key={idx}
                                         onClick={handlePageItem}
                                         active={idx + 1 === actualPage}>
                                         {idx + 1}
                                     </Pagination.Item>
-                                ))}
+                                )
+                            )}
 
-                                <Pagination.Next
-                                    onClick={handlePageNext}
-                                    disabled={actualPage === searchObject.info.pages}
-                                />
-                            </Pagination>
-                        </Row>
-                    </Container>
-                ) : null}
+                            <Pagination.Next
+                                onClick={handlePageNext}
+                                disabled={
+                                    actualPage === searchObject.info.pages
+                                }
+                            />
+                        </Pagination>
+                    </Row>
+                </Container>
+            )
+        }
+        return null
+    }
+
+    return (
+        <div className="main">
+            <Container className="main__container">
+                <Searcher />
+                <Row className="row-cards">
+                    <GridOfCards />
+                    <ModalChar
+                        id={currentId}
+                        char={character}
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                    />
+                    <ModalEpiLoc
+                        idEpiLoc={currentId}
+                        epi={episode}
+                        loc={location}
+                        filter={filter}
+                        showEpiLoc={modalEpiLocShow}
+                        onHideEpiLoc={() => setModalEpiLocShow(false)}
+                    />
+                </Row>
+                <DataPagination />
             </Container>
         </div>
     )
@@ -191,7 +206,6 @@ Main.propTypes = {
     episode: PropTypes.object,
     location: PropTypes.object,
 }
-
 
 export default connect(mapState, {
     setObjectIdAction,

@@ -48,9 +48,7 @@ function Searcher({
         // search doesn't start's until user types 3rd char
         if (input.length >= 3) {
             setDisplayAction(true)
-        } else {
-            setDisplayAction(false)
-        }
+        } 
     }
 
     // user select name attribute radio button
