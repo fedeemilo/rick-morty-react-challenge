@@ -77,8 +77,7 @@ function Searcher({
                         className="searcher__input"
                         type="text"
                         onChange={handleInput}
-                        placeholder="Enter your search..."
-                        autoCapitalize
+                        placeholder="Enter your search..."                    
                     />
                     <Button
                         variant="outline-primary"

@@ -1,11 +1,10 @@
 import React, { useState } from "react"
 
 import { Container, Row, Col, Pagination } from "react-bootstrap"
-import { Zoom, Fade } from "react-reveal"
+import { Fade } from "react-reveal"
 import { Searcher, Card } from "../"
 
-import ModalChar from "../utilities/modals/ModalChar"
-import ModalEpiLoc from "../utilities/modals/ModalEpiLoc"
+import Modal from "../utilities/modal/Modal"
 
 import {
     setObjectIdAction,
@@ -39,7 +38,6 @@ function Main({
     itemPageAction,
 }) {
     let [modalShow, setModalShow] = useState(false)
-    let [modalEpiLocShow, setModalEpiLocShow] = useState(false)
     let [currentId, setCurrentId] = useState("")
     let [actualPage, setActualPage] = useState(1)
 
@@ -56,12 +54,12 @@ function Main({
                 break
             case "locations":
                 getLocationAction()
-                setModalEpiLocShow(true)
+                setModalShow(true)
                 setDisplayLocationAction(true)
                 break
             case "episodes":
                 getEpisodeAction()
-                setModalEpiLocShow(true)
+                setModalShow(true)
                 setDisplayEpisodeAction(true)
                 break
             default:
@@ -154,19 +152,14 @@ function Main({
                 <Searcher />
                 <Row className="row-cards">
                     <GridOfCards />
-                    <ModalChar
+                    <Modal
                         id={currentId}
                         char={character}
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                    />
-                    <ModalEpiLoc
-                        idEpiLoc={currentId}
                         epi={episode}
                         loc={location}
                         filter={filter}
-                        showEpiLoc={modalEpiLocShow}
-                        onHideEpiLoc={() => setModalEpiLocShow(false)}
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
                     />
                 </Row>     
                 <DataPagination />
