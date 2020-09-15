@@ -27,8 +27,6 @@ function Searcher({
     let [disable, setDisable] = useState(false)
     let [btnDisable, setBtnDisable] = useState(true)
 
-    let winWidth = window.innerWidth
-
     useEffect(() => {
         // if the filter selected is episodes, it disable's type attr
         if (filter === "episodes") {
@@ -42,13 +40,9 @@ function Searcher({
     let handleInput = e => {
 
         let input = e.target.value
-        // set the search attribute from store
         setSearchAction(input)
-        // new action query with data provided by the user
         getDataAction()
-        // active reset button
         setBtnDisable(false)
-        // enable reset button
         setResetAction(false)
 
         // search doesn't start's until user types 3rd char
@@ -74,7 +68,6 @@ function Searcher({
         searcher.value = ""
     }
 
-    // capitalize string
     let capitalize = ([first, ...rest], lowerRest = false) =>
         first.toUpperCase() +
         (lowerRest ? rest.join("").toLowerCase() : rest.join(""))

@@ -1,10 +1,8 @@
 import React from "react"
 
 function Footer() {
-    // repository for this project
-    let githubRepo = "https://github.com/fedeemilo/rick-morty-react-challenge"
 
-    // my portfolio
+    let githubRepo = "https://github.com/fedeemilo/rick-morty-react-challenge"
     let myPortfolio = "https://federico-milone.vercel.app"
 
     return (

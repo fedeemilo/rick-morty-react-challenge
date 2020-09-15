@@ -50,9 +50,7 @@ function Main({
 
         switch (filter) {
             case "characters":
-                // obtain data for modal completion
                 getCharAction()
-                // display modal
                 setModalShow(true)
                 setDisplayCharAction(true)
                 break
@@ -93,7 +91,6 @@ function Main({
     return (
         <div className="main">
             <Container className="main__container">
-                {/* searcher */}
                 <Searcher />
                 <Row className='row-cards'>
                     {/* grid of cards */}
@@ -110,14 +107,12 @@ function Main({
                                         handleClickCard={handleClickCard}
                                     />
                                 </Fade>
-                                {/* modal for character */}
                                 <ModalChar
                                     id={currentId}
                                     char={character}
                                     show={modalShow}
                                     onHide={() => setModalShow(false)}
                                 />
-                                {/* modal for location or episode */}
                                 <ModalEpiLoc
                                     idEpiLoc={currentId}
                                     epi={episode}
@@ -132,7 +127,6 @@ function Main({
                         ))
                     ) : (
                         <Zoom>
-                            {/* home image */}
                             <img src={Rick} alt="rick" className="rick-pic" />
                         </Zoom>
                     )}
