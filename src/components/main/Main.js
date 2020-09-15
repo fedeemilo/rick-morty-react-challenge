@@ -22,9 +22,9 @@ import PropTypes from "prop-types"
 import Rick from "../../assets/img/rick-nobg.png"
 
 function Main({
-    obj,
-    display,
-    reset,
+    searchObject,
+    displayCards,
+    resetSearch,
     filter,
     setObjectIdAction,
     getCharAction,
@@ -94,8 +94,8 @@ function Main({
                 <Searcher />
                 <Row className='row-cards'>
                     {/* grid of cards */}
-                    {display && !reset && obj !== undefined ? (
-                        obj.results.map(char => (
+                    {displayCards && !resetSearch && searchObject !== undefined ? (
+                        searchObject.results.map(char => (
                             <Col key={char.id}>
                                 <Fade effect="fadeInUp">
                                     <Card
@@ -131,7 +131,7 @@ function Main({
                         </Zoom>
                     )}
                 </Row>
-                {display && !reset && obj !== undefined ? (
+                {displayCards && !resetSearch && searchObject !== undefined ? (
                     <Container className="mt-4 d-flex justify-content-center">
                         <Row>
                             <Pagination size="lg">
@@ -140,7 +140,7 @@ function Main({
                                     disabled={actualPage === 1}
                                 />
                                 {/* for each page add a pagination item */}
-                                {[...Array(obj.info.pages)].map((page, idx) => (
+                                {[...Array(searchObject.info.pages)].map((page, idx) => (
                                     <Pagination.Item
                                         key={idx}
                                         onClick={handlePageItem}
@@ -151,7 +151,7 @@ function Main({
 
                                 <Pagination.Next
                                     onClick={handlePageNext}
-                                    disabled={actualPage === obj.info.pages}
+                                    disabled={actualPage === searchObject.info.pages}
                                 />
                             </Pagination>
                         </Row>
@@ -164,10 +164,10 @@ function Main({
 
 function mapState(state) {
     return {
-        display: state.search.display,
+        displayCards: state.search.display,
         filter: state.search.filter,
-        obj: state.search.object[`${state.search.filter}`],
-        reset: state.search.reset,
+        searchObject: state.search.object[`${state.search.filter}`],
+        resetSearch: state.search.resetSearch,
         character: state.modal.objectChar.character,
         episode: state.modal.objectEpisode.episode,
         location: state.modal.objectLocation.location,
@@ -175,10 +175,10 @@ function mapState(state) {
 }
 
 Main.propTypes = {
-    obj: PropTypes.object,
-    display: PropTypes.bool,
+    searchObject: PropTypes.object,
+    displayCards: PropTypes.bool,
     filter: PropTypes.string,
-    reset: PropTypes.bool,
+    resetSearch: PropTypes.bool,
     setObjectIdAction: PropTypes.func,
     getCharAction: PropTypes.func,
     getLocationAction: PropTypes.func,

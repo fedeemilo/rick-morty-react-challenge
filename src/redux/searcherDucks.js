@@ -4,7 +4,7 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 // constants
 let initialData = {
     display: false,
-    object: [],
+    object: {},
     search: "",
     filter: "characters",
     fetching: false,

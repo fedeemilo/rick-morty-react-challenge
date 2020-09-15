@@ -20,7 +20,6 @@ let client = new ApolloClient({
 })
 
 /* constants */
-
 let CHAR = "CHAR"
 let CHAR_SUCCESS = "CHAR_SUCCESS"
 let CHAR_ERROR = "CHAR_ERROR"
@@ -173,7 +172,6 @@ export let getCharAction = () => (dispatch, getState) => {
 }
 
 // get location data action
-
 export let getLocationAction = () => (dispatch, getState) => {
     let ID = getState().modal.objectId
 

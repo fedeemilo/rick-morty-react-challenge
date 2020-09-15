@@ -14,7 +14,7 @@ function Filter({
     isDisabled,
     filter,
     attribute,
-    search,
+    searchObject,
 }) {
     let handleFilterSelect = e => {
         let filter = e.target.id.toLowerCase()
@@ -34,7 +34,7 @@ function Filter({
                             ? handleFilterSelect
                             : handleRadio
                     }
-                    disabled={isDisabled || search !== ""}
+                    disabled={isDisabled || searchObject !== ""}
                     checked={
                         filter === filterName.toLowerCase() ||
                         attribute === filterName.toLowerCase()
@@ -48,7 +48,7 @@ function Filter({
 
 function mapState(state) {
     return {
-        search: state.search.search,
+        searchObject: state.search.search,
         filter: state.search.filter,
         attribute: state.search.attribute,
     }
@@ -63,7 +63,7 @@ Filter.propTypes = {
     isDisabled: PropTypes.bool,
     filter: PropTypes.string,
     attribute: PropTypes.string,
-    search: PropTypes.string,
+    searchObject: PropTypes.string,
 }
 
 export default connect(mapState, { setFilterAction, getDataAction })(Filter)
