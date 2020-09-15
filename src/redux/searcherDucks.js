@@ -58,7 +58,7 @@ export default function reducer(state = initialData, action) {
         case GET_RESET:
             return { ...state, reset: action.payload, fetching: false }
         case CLEAN_STATE:
-            return { ...state, object: {} }
+            return { ...state, object: Object.assign({}, state) }
         case NEW_PAGE:
             return { ...state, newPage: action.payload }
         default:

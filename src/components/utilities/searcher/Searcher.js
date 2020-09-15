@@ -62,6 +62,7 @@ function Searcher({
         setBtnDisable(true)
         setResetAction(true)
         cleanStateAction()
+        setDisplayAction(false)
         setSearchAction("")
         searcher.value = ""
     }

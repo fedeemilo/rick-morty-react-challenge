@@ -106,10 +106,8 @@ function Main({
                 </Col>
             ))
         }
-        return (
-            <Zoom>
-                <img src={Rick} alt="rick" className="rick-pic" />
-            </Zoom>
+        return (          
+                <img src={Rick} alt="rick" className="rick-pic" />        
         )
     }
 
@@ -170,7 +168,7 @@ function Main({
                         showEpiLoc={modalEpiLocShow}
                         onHideEpiLoc={() => setModalEpiLocShow(false)}
                     />
-                </Row>
+                </Row>     
                 <DataPagination />
             </Container>
         </div>

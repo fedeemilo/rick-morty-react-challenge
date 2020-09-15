@@ -19,14 +19,14 @@ function Card({ name, image, dimension, episode, handleClickCard, id }) {
                 <h4 className='text-primary'>{name}</h4>
             </div>
             <div className='card__body'>
-                {image !== undefined ? <img src={image} alt={name} /> : null}
+                {!!image ? <img src={image} alt={name} /> : null}
 
-                {dimension !== undefined ? (
+                {!!dimension ? (
                    
                     <p className='text-center font-italic'>{dimension}</p>
                 ) : null}
 
-                {episode !== undefined ? (
+                {!!episode ? (
                     <h4 className='text-center mt-3 h5'>{episode}</h4>
                 ) : null}
             </div>
